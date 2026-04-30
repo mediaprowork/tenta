@@ -6,7 +6,6 @@ import PricingSection from '@components/sections/service/PricingSection.astro';
 import ServiceProcess from '@components/sections/service/ServiceProcess.astro';
 import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
 import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
-import KrakenMascot from '@components/brand/KrakenMascot.astro';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 
@@ -27,14 +26,23 @@ interface Props {
 }
 
 const { data, slug } = Astro.props;
+
+const serviceImages: Record<string, string> = {
+  web:    '/assets/services/webdev.png',
+  google: '/assets/services/google.png',
+  meta:   '/assets/services/meta.png',
+  konsul: '/assets/services/konsul.png',
+};
+const imgSrc = serviceImages[data.icon];
+
 const url = `${site.url}/services/${slug}`;
 const jsonLd = [
   serviceJsonLd({ name: data.seo.title, description: data.seo.description, url }),
   faqJsonLd(data.faqs),
   breadcrumbJsonLd([
-    { name: 'Beranda',     url: site.url },
-    { name: 'Layanan',     url: `${site.url}/#layanan` },
-    { name: data.eyebrow,  url },
+    { name: 'Beranda',    url: site.url },
+    { name: 'Layanan',    url: `${site.url}/#layanan` },
+    { name: data.eyebrow, url },
   ]),
 ];
 ---
@@ -50,7 +58,18 @@ const jsonLd = [
     titleAccent={data.titleAccent}
     desc={data.desc}
   >
-    <KrakenMascot slot="illustration" size={320} />
+    <!-- Ilustrasi per layanan dengan float animation (konsisten dengan beranda) -->
+    <div slot="illustration" class="service-img-wrap">
+      <img
+        src={imgSrc}
+        alt={data.eyebrow}
+        class="service-hero-img"
+        width="420"
+        height="420"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
   </ServiceHero>
   <FeaturesGrid title="Apa yang Kami Bawa" sub="Hal-hal kecil yang bikin hasil beda." items={data.features} />
   <PricingSection plans={data.plans} />
@@ -58,3 +77,33 @@ const jsonLd = [
   <ServiceFAQ items={data.faqs} />
   <ServiceCTA />
 </BaseLayout>
+
+<style>
+  .service-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* Float animation — sama dengan kraken-float di beranda */
+    animation: krakenFloat 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 24px 48px rgba(255, 107, 26, 0.18));
+    will-change: transform;
+  }
+  .service-hero-img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    display: block;
+  }
+  @keyframes krakenFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25%       { transform: translateY(-14px) rotate(0.8deg); }
+    75%       { transform: translateY(-6px) rotate(-0.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .service-img-wrap { animation: none; }
+  }
+  @media (max-width: 760px) {
+    .service-hero-img { max-width: min(340px, 85vw); }
+  }
+</style>
