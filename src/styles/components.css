@@ -1149,9 +1149,10 @@ img { max-width: 100%; height: auto; }
 
 /* === Tablet & smaller (≤ 1100px) === */
 @media (max-width: 1100px) {
-  /* Hero — stack & resize */
+  /* Hero */
   .hero-mascot-wrap { min-height: auto !important; }
-  .hero-mascot, .hero-mascot-wrap img { max-width: 380px !important; margin: 0 auto; }
+  .hero-mascot, .hero-mascot-wrap img { max-width: 420px !important; margin: 0 auto; }
+  .hero-title { font-size: clamp(30px, 4.5vw, 42px) !important; }
 
   /* Section title */
   .section-title { font-size: clamp(28px, 4vw, 36px); }
@@ -1160,6 +1161,70 @@ img { max-width: 100%; height: auto; }
   .cta-banner { padding: 32px 28px; }
   .cta-banner h3 { font-size: clamp(20px, 3vw, 26px) !important; }
   .cta-banner-clean, .cta-banner-light { padding: 32px 32px; }
+}
+
+/* === Tablet portrait (768px – 1100px) === */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .container { padding: 0 28px; }
+  section { padding: 64px 0; }
+
+  /* Hero — stack vertikal di tablet portrait */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center;
+  }
+  .hero-grid > div:first-child { align-items: center; display: flex; flex-direction: column; }
+  .hero-mascot-wrap { justify-content: center; }
+  .hero-mascot, .hero-mascot-wrap img, .kraken-float img {
+    max-width: min(500px, 70vw) !important;
+    margin: 0 auto;
+  }
+  .hero-title { font-size: clamp(32px, 5vw, 44px) !important; text-align: left; }
+  .hero-feature-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+
+  /* Services — 2 col di tablet portrait */
+  section [style*="repeat(4, 1fr)"],
+  section [style*="repeat(4,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+  }
+
+  /* Case study & testimonials tetap 2 col */
+  section [style*="repeat(3, 1fr)"],
+  section [style*="repeat(3,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+  }
+
+  /* Team — 2 col */
+  section [style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Asymmetric 2-col — kurangi gap tapi tetap side-by-side */
+  .container[style*="1fr 1.3fr"],
+  .container[style*="1.2fr 1fr"],
+  .container[style*="1.1fr 1fr"],
+  section > .container[style*="1.2fr 1fr"],
+  section > .container[style*="1.1fr 1fr"],
+  section > .container[style*="1fr 1.3fr"] {
+    gap: 28px !important;
+  }
+
+  /* Pricing — 3 col tetap tapi lebih compact */
+  .pricing-card { padding: 24px 20px; }
+  .price { font-size: 30px; }
+
+  /* Process grid 2×2 */
+  section [style*="repeat(4, 1fr)"].process-grid,
+  .process-step { padding: 20px; }
+
+  /* Footer — 2 col */
+  .footer .container { grid-template-columns: 1fr 1fr !important; gap: 32px 24px !important; }
+
+  /* Form kontak — side by side tetap */
+  .card[style*="padding:32px"] { padding: 28px !important; }
 }
 
 /* === Mobile-large (≤ 760px) — overrides === */
@@ -1176,8 +1241,9 @@ img { max-width: 100%; height: auto; }
   .hero-feature-cell { padding: 10px !important; gap: 10px !important; }
   .hero-feature-icon { width: 36px !important; height: 36px !important; }
 
-  /* Hero mascot smaller */
-  .hero-mascot, .hero-mascot-wrap img { max-width: 280px !important; }
+  /* Hero mascot — besar di mobile */
+  .hero-mascot-wrap, .kraken-float { width: 100% !important; max-width: 100% !important; }
+  .hero-mascot, .hero-mascot-wrap img, .kraken-float img { max-width: min(480px, 95vw) !important; width: 100% !important; margin: 0 auto; }
   .kraken-float { animation-duration: 3.5s; }
 
   /* Section titles */
@@ -1264,7 +1330,7 @@ img { max-width: 100%; height: auto; }
 
   /* Hero — single col tighter */
   .hero-feature-strip { grid-template-columns: 1fr !important; padding: 14px !important; }
-  .hero-mascot, .hero-mascot-wrap img { max-width: 240px !important; }
+  .hero-mascot, .hero-mascot-wrap img, .kraken-float img { max-width: min(440px, 94vw) !important; }
   .hero-title { font-size: 24px !important; }
 
   /* Section text */
