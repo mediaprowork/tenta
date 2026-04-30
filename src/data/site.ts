@@ -6,7 +6,7 @@ export const site = {
   wa: PUBLIC_WA_NUMBER,
   email: 'hello@tentaklik.com',
   emailKarir: 'karir@tentaklik.com',
-  phone: '0812-3456-7890',
+  phone: '085177111104',
   address: 'Jakarta, Indonesia',
   social: {
     instagram: 'https://instagram.com/tentaklik',
