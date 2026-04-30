@@ -36,19 +36,30 @@ const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
 
       <div id="cases-grid" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
         {allCases.map(c => (
-          <div class="card reveal case-card" data-tags={c.data.tags.join(',')}>
-            <div style="height:160px;border-radius:12px;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;border:1px dashed var(--orange-300);">
-              <span style="font-family:monospace;font-size:12px;color:var(--orange-700);">{c.data.brand} — hero shot</span>
+          <div class="card reveal case-card cs-card" data-tags={c.data.tags.join(',')} style="padding:0;overflow:hidden;">
+            <!-- Cover -->
+            <div class="cs-cover">
+              {c.data.cover ? (
+                <img src={c.data.cover} alt={c.data.brand} loading="lazy" decoding="async"
+                  style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;">
+                  <span style="font-family:monospace;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+                </div>
+              )}
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">{c.data.industry ?? ''}</span>
-              <span style="font-size:11px;color:var(--ink-500);">{c.data.period ?? ''}</span>
-            </div>
-            <h3 style="font-size:20px;">{c.data.brand}</h3>
-            <div style="font-size:24px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
-            <p style="font-size:14px;color:var(--ink-500);flex:1;">{c.data.desc}</p>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+            <!-- Content -->
+            <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">{c.data.industry ?? ''}</span>
+                <span style="font-size:11px;color:var(--ink-500);">{c.data.period ?? ''}</span>
+              </div>
+              <h3 style="font-size:19px;margin:0;">{c.data.brand}</h3>
+              <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
+              <p style="font-size:13.5px;color:var(--ink-500);flex:1;margin:0;">{c.data.desc}</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;">
+                {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+              </div>
             </div>
           </div>
         ))}
@@ -87,6 +98,17 @@ const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
   .filter-btn.active { border-color: var(--orange-500); background: var(--orange-500); color: white; }
   .case-card { display: flex; flex-direction: column; gap: 14px; }
   .case-card[hidden] { display: none !important; }
+  .cs-cover {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--orange-50);
+  }
+  .cs-card { display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .cs-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .cs-cover img { transition: transform 0.4s ease; }
+  .cs-card:hover .cs-cover img { transform: scale(1.04); }
 </style>
 
 <script>

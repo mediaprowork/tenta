@@ -5,6 +5,7 @@ desc: "Penjualan emas Antam online — landing page terpercaya + ads campaign ya
 tags: ["Website", "Google Ads", "Meta Ads"]
 industry: "Investment"
 period: "10 bulan"
+cover: "/assets/case-study/antam.webp"
 publishDate: 2026-04-05
 ---
 

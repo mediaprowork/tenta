@@ -12,18 +12,48 @@ const cases = allCases
     <p class="section-sub" style="margin-bottom:40px;">Hasil dari brand yang udah kerja bareng kami.</p>
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
       {cases.map(c => (
-        <a href={`/case-study/${c.id}`} class="card reveal" style="display:flex;flex-direction:column;gap:14px;cursor:pointer;">
-          <div style="height:140px;border-radius:12px;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;border:1px dashed var(--orange-300);">
-            <span style="font-family:monospace;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+        <a href={`/case-study/${c.id}`} class="card reveal cs-card" style="display:flex;flex-direction:column;gap:14px;cursor:pointer;padding:0;overflow:hidden;">
+          <!-- Cover image -->
+          <div class="cs-cover">
+            {c.data.cover ? (
+              <img
+                src={c.data.cover}
+                alt={c.data.brand}
+                loading="lazy"
+                decoding="async"
+                style="width:100%;height:100%;object-fit:cover;display:block;"
+              />
+            ) : (
+              <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;border-bottom:1px dashed var(--orange-300);">
+                <span style="font-family:monospace;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+              </div>
+            )}
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+          <!-- Content -->
+          <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+            </div>
+            <h3 style="font-size:18px;margin:0;">{c.data.brand}</h3>
+            <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
+            <p style="font-size:14px;color:var(--ink-500);margin:0;">{c.data.desc}</p>
           </div>
-          <h3 style="font-size:19px;">{c.data.brand}</h3>
-          <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
-          <p style="font-size:14px;color:var(--ink-500);">{c.data.desc}</p>
         </a>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .cs-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .cs-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .cs-cover {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--orange-50);
+  }
+  .cs-cover img { transition: transform 0.4s ease; }
+  .cs-card:hover .cs-cover img { transform: scale(1.04); }
+</style>

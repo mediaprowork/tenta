@@ -5,6 +5,7 @@ desc: "Jasa rental kendaraan di Yogyakarta — website booking + Google Ads sear
 tags: ["Website", "Google Ads"]
 industry: "Travel"
 period: "8 bulan"
+cover: "/assets/case-study/jogjaride.webp"
 publishDate: 2026-04-10
 ---
 
