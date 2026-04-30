@@ -1,0 +1,31 @@
+---
+import Star from '../icons/Star.astro';
+import { getCollection } from 'astro:content';
+
+const testis = await getCollection('testimonials');
+---
+<section>
+  <div class="container">
+    <h2 class="section-title">Apa Kata Klien</h2>
+    <p class="section-sub" style="margin-bottom:40px;">Hasil nyata dari kerjasama bareng tim Tentaklik.</p>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+      {testis.map(t => (
+        <div class="testi-card reveal">
+          <!-- Spacer agar tanda kutip (::before) tidak bertumpuk dengan bintang -->
+          <div style="height:36px;"></div>
+          <div style="display:flex;flex-direction:row;align-items:center;gap:6px;margin-bottom:14px;">
+            {Array.from({ length: t.data.stars }).map(() => <Star size={15} />)}
+          </div>
+          <p style="font-size:15px;color:var(--ink-700);margin-bottom:18px;line-height:1.6;">{t.data.text}</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="avatar">{t.data.initials}</span>
+            <div>
+              <div style="font-size:14px;font-weight:700;">{t.data.name}</div>
+              <div style="font-size:12px;color:var(--ink-500);">{t.data.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

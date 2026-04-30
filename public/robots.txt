@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tentaklik.com/sitemap-index.xml

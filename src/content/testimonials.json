@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "stars": 5,
+    "text": "Leads masuk jauh lebih rapi setelah website dan Google Ads dibenahi. Timnya enak diajak diskusi.",
+    "name": "Rina",
+    "role": "Marketing Manager",
+    "initials": "R"
+  },
+  {
+    "id": "2",
+    "stars": 5,
+    "text": "Meta Ads jadi makin stabil dan closing rate naik. Reporting-nya juga jelas tiap minggu.",
+    "name": "Fajar",
+    "role": "Owner Brand",
+    "initials": "F"
+  },
+  {
+    "id": "3",
+    "stars": 5,
+    "text": "Sesi konsultasinya ngebantu banget buat nentuin prioritas channel marketing kami.",
+    "name": "Dimas",
+    "role": "Founder",
+    "initials": "D"
+  }
+]

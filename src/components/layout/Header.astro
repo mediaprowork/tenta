@@ -1,0 +1,388 @@
+---
+import TentaklikLogo from '../brand/TentaklikLogo.astro';
+import { waLink } from '@data/site';
+
+interface Props {
+  active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
+}
+const { active = 'beranda' } = Astro.props;
+
+const services = [
+  { label: 'Website Development',          href: '/services/website',     icon: '🌐' },
+  { label: 'Google Ads',                   href: '/services/google-ads',  icon: '📈' },
+  { label: 'Meta Ads',                     href: '/services/meta-ads',    icon: '📲' },
+  { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: '🧭' },
+];
+
+const links = [
+  { id: 'beranda', label: 'Beranda',      href: '/' },
+  { id: 'case',    label: 'Case Study',   href: '/case-study' },
+  { id: 'tentang', label: 'Tentang Kami', href: '/tentang' },
+  { id: 'karir',   label: 'Karir',        href: '/karir' },
+  { id: 'kontak',  label: 'Kontak',       href: '/kontak' },
+];
+---
+<header class="header" id="site-header">
+  <div class="container nav">
+    <a href="/" style="display:flex;align-items:center;" aria-label="Tentaklik beranda">
+      <TentaklikLogo size={22} />
+    </a>
+
+    <nav class="nav-links nav-links-right" aria-label="Navigasi utama">
+      <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+
+      <!-- Layanan dengan dropdown -->
+      <div class="nav-dropdown-wrap" id="layanan-wrap">
+        <button
+          class={`nav-dropdown-trigger ${active === 'layanan' ? 'active' : ''}`}
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="layanan-menu"
+          type="button"
+        >
+          Layanan
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown" id="layanan-menu" role="menu">
+          {services.map(s => (
+            <a href={s.href} class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-icon" aria-hidden="true">{s.icon}</span>
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {links.filter(l => l.id !== 'beranda').map(l => (
+        <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
+      ))}
+    </nav>
+
+    <!-- Burger only (mobile) -->
+    <div class="nav-right">
+      <button
+        class="nav-burger"
+        id="nav-burger"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        type="button"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-panel">
+      <nav class="mobile-drawer-links" aria-label="Navigasi mobile">
+        <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+
+        <!-- Layanan expand di mobile -->
+        <div class="mobile-layanan">
+          <button class="mobile-layanan-trigger" type="button" aria-expanded="false">
+            Layanan
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mobile-layanan-sub" hidden>
+            {services.map(s => (
+              <a href={s.href} class="mobile-sub-item">
+                <span aria-hidden="true">{s.icon}</span> {s.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {links.filter(l => l.id !== 'beranda').map(l => (
+          <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
+        ))}
+      </nav>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+        <a href={waLink('Halo Tentaklik, saya ingin konsultasi')} target="_blank" rel="noopener noreferrer" class="btn btn-wa" style="justify-content:center;">
+          Chat WhatsApp
+        </a>
+        <a href="/kontak" class="btn btn-primary" style="justify-content:center;">
+          Konsultasi Gratis
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Nav links pushed to right */
+  .nav-links-right {
+    margin-left: auto;
+  }
+
+  /* Dropdown wrapper */
+  .nav-dropdown-wrap {
+    position: relative;
+  }
+
+  /* Trigger button looks like a nav link */
+  .nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 6px 0;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-700);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.15s;
+  }
+  .nav-dropdown-trigger:hover,
+  .nav-dropdown-trigger.active { color: var(--orange-600); }
+  .nav-dropdown-trigger.active::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -2px;
+    transform: translateX(-50%);
+    width: 18px; height: 2px;
+    border-radius: 2px;
+    background: var(--orange-500);
+  }
+  .nav-dropdown-trigger .chevron {
+    transition: transform 0.2s ease;
+  }
+  .nav-dropdown-trigger[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown panel */
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 32px rgba(31,26,23,0.10), 0 2px 8px rgba(31,26,23,0.06);
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 50;
+  }
+  .nav-dropdown.open { display: flex; }
+
+  /* Dropdown arrow */
+  .nav-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px; height: 12px;
+    background: white;
+    border-left: 1px solid var(--ink-100);
+    border-top: 1px solid var(--ink-100);
+  }
+
+  .nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-700);
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .nav-dropdown-item:hover { background: var(--orange-50); color: var(--orange-700); }
+  .nav-dropdown-icon {
+    font-size: 16px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--orange-100);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* WA icon button */
+  .nav-wa-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: var(--orange-500);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  .nav-wa-btn:hover { background: var(--orange-600); transform: scale(1.05); }
+
+  /* Hide CTA buttons on mobile (burger shows them in drawer) */
+  .nav-cta { display: none; }
+  @media (min-width: 1101px) {
+    .nav-cta { display: inline-flex; }
+    .nav-wa-btn { display: inline-flex; }
+  }
+  @media (max-width: 1100px) {
+    .nav-wa-btn { display: none; }
+  }
+
+  /* Mobile layanan expand */
+  .mobile-layanan { display: flex; flex-direction: column; }
+  .mobile-layanan-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-700);
+    background: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-layanan-trigger:hover { background: var(--orange-50); color: var(--orange-600); }
+  .mobile-layanan-trigger svg { transition: transform 0.2s; }
+  .mobile-layanan-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  .mobile-layanan-sub { display: flex; flex-direction: column; padding-left: 12px; }
+  .mobile-sub-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 12px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-500);
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-sub-item:hover { background: var(--orange-50); color: var(--orange-700); }
+</style>
+
+<script>
+  /* ── Scroll ── */
+  const header = document.getElementById('site-header');
+  function onScroll() {
+    if (!header) return;
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Desktop dropdown (Layanan) ── */
+  const trigger = document.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+  const menu = document.getElementById('layanan-menu');
+
+  function openMenu() {
+    if (!trigger || !menu) return;
+    menu.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    if (!trigger || !menu) return;
+    menu.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (trigger && menu) {
+    // Hover
+    const wrap = trigger.closest('.nav-dropdown-wrap');
+    wrap?.addEventListener('mouseenter', openMenu);
+    wrap?.addEventListener('mouseleave', closeMenu);
+
+    // Click toggle (touch / keyboard)
+    trigger.addEventListener('click', () => {
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!wrap?.contains(e.target as Node)) closeMenu();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Close when a menu item is clicked
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  }
+
+  /* ── Mobile drawer ── */
+  const burger = document.getElementById('nav-burger');
+  const drawer = document.getElementById('mobile-drawer');
+  let lastFocused: HTMLElement | null = null;
+
+  function openDrawer() {
+    if (!burger || !drawer) return;
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    burger.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Tutup menu');
+    document.body.style.overflow = 'hidden';
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    drawer.querySelector<HTMLElement>('a, button')?.focus();
+  }
+  function closeDrawer() {
+    if (!burger || !drawer) return;
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Buka menu');
+    document.body.style.overflow = '';
+    lastFocused?.focus();
+  }
+
+  burger?.addEventListener('click', () => {
+    drawer?.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  drawer?.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+  drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  /* Mobile layanan expand */
+  const mobileTrigger = document.querySelector<HTMLButtonElement>('.mobile-layanan-trigger');
+  const mobileSub = document.querySelector<HTMLElement>('.mobile-layanan-sub');
+  mobileTrigger?.addEventListener('click', () => {
+    const open = mobileTrigger.getAttribute('aria-expanded') === 'true';
+    mobileTrigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (mobileSub) mobileSub.hidden = open;
+  });
+
+  function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && drawer?.classList.contains('open')) { closeDrawer(); return; }
+    if (e.key === 'Tab' && drawer?.classList.contains('open')) {
+      const focusable = drawer.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  document.addEventListener('keydown', onKeydown);
+
+  document.addEventListener('astro:before-swap', () => {
+    window.removeEventListener('scroll', onScroll);
+    document.removeEventListener('keydown', onKeydown);
+  }, { once: true });
+</script>

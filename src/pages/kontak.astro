@@ -1,0 +1,193 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import KrakenMini from '@components/brand/KrakenMini.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+import WhatsApp from '@components/icons/WhatsApp.astro';
+import Email from '@components/icons/Email.astro';
+import Phone from '@components/icons/Phone.astro';
+import Pin from '@components/icons/Pin.astro';
+import { site, waLink } from '@data/site';
+---
+<BaseLayout
+  title="Kontak"
+  description="Hubungi Tentaklik — isi form atau langsung WhatsApp. Kami balas dalam 1×24 jam kerja."
+  active="kontak"
+>
+  <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Hubungi Kami</span>
+      <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
+        Yuk ngobrol soal <span style="color:var(--orange-500);">bisnis Anda</span>.
+      </h1>
+      <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
+        Isi form di bawah atau langsung WhatsApp kami. Kami balas dalam 1×24 jam kerja.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:32px;">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1.3fr;gap:40px;max-width:1080px;margin:0 auto;">
+
+      <!-- Left: contact info -->
+      <div>
+        <div style="margin-bottom:32px;position:relative;">
+          <KrakenMini size={140} />
+        </div>
+        <h3 style="font-size:22px;margin-bottom:18px;">Channel Lain</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href={waLink('Halo Tentaklik, saya ingin konsultasi')} target="_blank" rel="noopener noreferrer"
+            class="contact-row">
+            <div class="contact-icon"><WhatsApp size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">WhatsApp</div>
+              <div style="font-size:15px;font-weight:600;">{site.phone}</div>
+            </div>
+          </a>
+          <a href={`mailto:${site.email}`} class="contact-row">
+            <div class="contact-icon"><Email size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">Email</div>
+              <div style="font-size:15px;font-weight:600;">{site.email}</div>
+            </div>
+          </a>
+          <div class="contact-row">
+            <div class="contact-icon"><Phone size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">Telepon</div>
+              <div style="font-size:15px;font-weight:600;">(021) 1234-5678</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><Pin size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">Lokasi</div>
+              <div style="font-size:15px;font-weight:600;">{site.address}</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding:20px;background:var(--orange-50);border-radius:16px;border:1px solid var(--orange-200);">
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Jam Operasional</div>
+          <div style="font-size:13px;color:var(--ink-500);">Senin–Jumat · 09:00–18:00 WIB</div>
+          <div style="font-size:13px;color:var(--ink-500);">Sabtu · 09:00–13:00 WIB</div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <form id="kontak-form" class="card reveal" style="padding:32px;display:flex;flex-direction:column;gap:16px;">
+        <div id="form-sent" style="display:none;padding:14px;background:#DCFCE7;color:#15803D;border-radius:10px;font-size:14px;font-weight:600;">
+          ✓ Pesan terkirim! Kami akan balas secepatnya.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="kontak-name">Nama Lengkap *</label>
+            <input id="kontak-name" name="name" required type="text" autocomplete="name" placeholder="Nama Anda"/>
+          </div>
+          <div class="form-field">
+            <label for="kontak-email">Email *</label>
+            <input id="kontak-email" name="email" required type="email" autocomplete="email" placeholder="email@domain.com"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="kontak-phone">Nomor WhatsApp</label>
+          <input id="kontak-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx"/>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="kontak-service">Layanan yang Diminati</label>
+            <select id="kontak-service" name="service">
+              <option value="Website Development">Website Development</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="Meta Ads">Meta Ads</option>
+              <option value="Konsultasi Digital Marketing">Konsultasi Digital Marketing</option>
+              <option value="Mix / Belum Tahu">Mix / Belum Tahu</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="kontak-budget">Estimasi Budget</label>
+            <select id="kontak-budget" name="budget">
+              <option value="< Rp 5jt">&lt; Rp 5jt</option>
+              <option value="Rp 5-10jt" selected>Rp 5-10jt</option>
+              <option value="Rp 10-25jt">Rp 10-25jt</option>
+              <option value="Rp 25-50jt">Rp 25-50jt</option>
+              <option value="> Rp 50jt">&gt; Rp 50jt</option>
+              <option value="Belum pasti">Belum pasti</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="kontak-message">Cerita Singkat tentang Project *</label>
+          <textarea id="kontak-message" name="message" required placeholder="Ceritakan kondisi bisnis, tujuan, dan apa yang sedang dicari..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;padding:14px 28px;">
+          Kirim Pesan <ArrowRight size={14} />
+        </button>
+        <p style="font-size:12px;color:var(--ink-500);">Dengan submit, Anda setuju kami menghubungi Anda untuk follow-up. Data tidak akan dibagikan ke pihak ketiga.</p>
+      </form>
+    </div>
+  </section>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div style="flex:1;">
+          <h3>Lebih cepat lewat WhatsApp?</h3>
+          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Klik tombol di samping untuk langsung chat dengan tim kami.</p>
+        </div>
+        <a href={waLink('Halo Tentaklik')} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          Chat WhatsApp <ArrowRight size={14} />
+        </a>
+        <div style="position:relative;"><KrakenMini size={110} /></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    transition: border-color 0.15s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .contact-row:hover { border-color: var(--orange-300); }
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--orange-100);
+    color: var(--orange-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  const WA_NUMBER = import.meta.env.PUBLIC_WA_NUMBER ?? '6285177111104';
+  const form = document.getElementById('kontak-form') as HTMLFormElement | null;
+  const sentMsg = document.getElementById('form-sent');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const get = (k: string) => String(fd.get(k) ?? '');
+      const msg =
+        `Halo Tentaklik, saya tertarik diskusi:\n\n` +
+        `Nama: ${get('name')}\n` +
+        `Email: ${get('email')}\n` +
+        `WhatsApp: ${get('phone')}\n` +
+        `Layanan: ${get('service')}\n` +
+        `Budget: ${get('budget')}\n\n` +
+        `Tentang project:\n${get('message')}`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      if (sentMsg) { sentMsg.style.display = 'flex'; setTimeout(() => { sentMsg.style.display = 'none'; }, 5000); }
+    });
+  }
+</script>

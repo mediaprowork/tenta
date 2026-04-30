@@ -1,0 +1,20 @@
+---
+interface Step { title: string; desc: string; }
+interface Props { steps: Step[]; }
+const { steps } = Astro.props;
+---
+<section>
+  <div class="container">
+    <h2 class="section-title">Proses Kerja</h2>
+    <p class="section-sub" style="margin-bottom:40px;">Step-by-step yang udah teruji.</p>
+    <div style={`display:grid;grid-template-columns:repeat(${steps.length}, 1fr);gap:16px;`}>
+      {steps.map((s, i) => (
+        <div class="process-step reveal">
+          <span class="process-num">{String(i + 1).padStart(2, '0')}</span>
+          <h3 style="font-size:17px;margin-bottom:6px;">{s.title}</h3>
+          <p style="font-size:13px;color:var(--ink-500);">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

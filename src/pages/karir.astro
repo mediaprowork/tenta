@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import KarirBenefits from '@components/sections/karir/KarirBenefits.astro';
+import KarirJobList from '@components/sections/karir/KarirJobList.astro';
+import KarirProcess from '@components/sections/karir/KarirProcess.astro';
+import KarirApplyForm from '@components/sections/karir/KarirApplyForm.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+---
+<BaseLayout
+  title="Karir"
+  description="Gabung jadi tentakel baru di Tentaklik. Lihat lowongan terbuka untuk Web Developer, Meta Ads, Google Ads, TikTok Ads, dan Customer Specialist."
+  active="karir"
+>
+  <section style="padding-top:56px;padding-bottom:48px;background:var(--bg-warm);position:relative;overflow:hidden;">
+    <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">
+      <div>
+        <span class="eyebrow">Karir</span>
+        <h1 style="font-size:48px;margin-top:18px;margin-bottom:18px;">
+          Gabung jadi <span style="color:var(--orange-500);">tentakel</span> baru di Tentaklik.
+        </h1>
+        <p style="font-size:17px;color:var(--ink-500);max-width:540px;">
+          Kami sedang berkembang dan butuh orang-orang yang serius soal craft. Tim kecil, dampak besar — kamu bukan sekadar resource, tapi partner yang ikut bentuk arah Tentaklik.
+        </p>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+          <a href="#lowongan" class="btn btn-primary">Lihat Lowongan <ArrowRight size={14} /></a>
+          <a href="#proses" class="btn btn-ghost">Cara Apply</a>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <img src="/assets/kraken-hero.png" alt="Tentaklik kraken" width="380" height="380" loading="lazy" style="width:100%;max-width:380px;height:auto;display:block;"/>
+      </div>
+    </div>
+  </section>
+
+  <KarirBenefits />
+  <KarirJobList />
+  <KarirProcess />
+  <KarirApplyForm />
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner cta-banner-light reveal">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>Posisi yang kamu cari belum ada?</h3>
+          <p style="margin-top:8px;font-size:15px;color:var(--ink-500);">Tetap kirim CV kamu — kalau cocok, kami simpan untuk peluang berikutnya.</p>
+        </div>
+        <a href="mailto:karir@tentaklik.com" class="btn btn-primary">Kirim CV ke Kami <ArrowRight size={14} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

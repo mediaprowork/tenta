@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+const faqs = await getCollection('faqs');
+const sorted = faqs.sort((a, b) => Number(a.id) - Number(b.id));
+---
+<section id="faq">
+  <div class="container" style="max-width:820px;">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-sub" style="margin-bottom:32px;">Pertanyaan yang sering kami terima.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      {sorted.map((f, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary class="faq-q" style="cursor:pointer;list-style:none;">
+            <span>{f.data.q}</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-a" style="max-height:none;margin-top:12px;">{f.data.a}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .faq-toggle { transform: rotate(45deg); background: var(--orange-500); color: white; }
+  details:not([open]) .faq-a { display: none; }
+</style>
+
+<script>
+  // Single-open accordion: tutup item lain saat satu dibuka
+  document.querySelectorAll<HTMLDetailsElement>('#faq details.faq-item').forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if (detail.open) {
+        document.querySelectorAll<HTMLDetailsElement>('#faq details.faq-item').forEach(other => {
+          if (other !== detail) other.open = false;
+        });
+      }
+    });
+  });
+</script>

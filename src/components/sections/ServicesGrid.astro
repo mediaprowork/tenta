@@ -1,0 +1,54 @@
+---
+import ArrowRight from '../icons/ArrowRight.astro';
+
+const services = [
+  { title: 'Website Development',           desc: 'Landing page, company profile, dan website yang fokus pada konversi.', slug: 'website',     icon: 'web' },
+  { title: 'Google Ads',                    desc: 'Campaign search, display, dan lead generation dengan tracking yang rapi.', slug: 'google-ads', icon: 'google' },
+  { title: 'Meta Ads',                      desc: 'Iklan Facebook & Instagram untuk awareness, leads, dan sales.', slug: 'meta-ads',    icon: 'meta' },
+  { title: 'Konsultasi Digital Marketing',  desc: 'Audit funnel, strategi channel, dan rekomendasi prioritas yang actionable.', slug: 'konsultasi', icon: 'konsul' },
+] as const;
+---
+<section id="layanan">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;position:relative;">
+      <h2 class="section-title">Layanan Utama</h2>
+      <p class="section-sub">Solusi inti untuk bantu bisnis lo tampil lebih profesional dan hasilkan leads.</p>
+      <span class="spark" style="top:-10px;left:15%;font-size:18px;" aria-hidden="true">✦</span>
+      <span class="spark" style="top:20px;right:12%;font-size:14px;" aria-hidden="true">✦</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+      {services.map(s => (
+        <div class="service-card reveal">
+          <div class="service-icon">
+            {s.icon === 'web' && (
+              <svg width="36" height="36" viewBox="0 0 40 40" aria-hidden="true">
+                <rect x="3" y="6" width="34" height="26" rx="3" fill="white" stroke="var(--orange-500)" stroke-width="2"/>
+                <rect x="3" y="6" width="34" height="6" rx="3" fill="var(--orange-500)"/>
+                <circle cx="7" cy="9" r="1" fill="white"/>
+                <circle cx="10" cy="9" r="1" fill="white"/>
+                <rect x="7" y="16" width="14" height="3" fill="var(--orange-300)"/>
+                <rect x="7" y="21" width="20" height="2" fill="var(--ink-200)"/>
+                <rect x="7" y="25" width="16" height="2" fill="var(--ink-200)"/>
+              </svg>
+            )}
+            {s.icon === 'google' && <img src="/assets/icon-google-ads.png" alt="" aria-hidden="true" style="width:40px;height:40px;object-fit:contain;display:block;" />}
+            {s.icon === 'meta' && <img src="/assets/icon-meta-ads.png" alt="" aria-hidden="true" style="width:42px;height:32px;object-fit:contain;display:block;" />}
+            {s.icon === 'konsul' && (
+              <svg width="36" height="36" viewBox="0 0 40 40" aria-hidden="true">
+                <circle cx="20" cy="20" r="14" fill="none" stroke="var(--orange-500)" stroke-width="2"/>
+                <circle cx="20" cy="20" r="9" fill="none" stroke="var(--orange-500)" stroke-width="2"/>
+                <circle cx="20" cy="20" r="4" fill="var(--orange-500)"/>
+                <path d="M 20 6 L 22 12 L 28 8 L 24 14 L 32 14" fill="none" stroke="var(--orange-700)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            )}
+          </div>
+          <h3 style="font-size:19px;">{s.title}</h3>
+          <p style="font-size:14px;color:var(--ink-500);flex:1;">{s.desc}</p>
+          <a href={`/services/${s.slug}`} class="btn btn-primary" style="padding:10px 16px;font-size:14px;justify-content:center;">
+            Lihat Service <ArrowRight size={14} />
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

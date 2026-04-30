@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import KrakenMascot from '@components/brand/KrakenMascot.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
+const values = [
+  { icon: '🎯', title: 'Hasil > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
+  { icon: '🔍', title: 'Transparan',         desc: 'Akun ads milik klien, data terbuka, fee jelas dari awal.' },
+  { icon: '🤝', title: 'Long-term Partner',  desc: 'Bukan vendor sekali pakai — kami investasi di growth Anda.' },
+];
+
+const team = [
+  { name: 'Aldi P.',  role: 'Founder & Strategist', initials: 'AP' },
+  { name: 'Sari W.',  role: 'Lead Performance',     initials: 'SW' },
+  { name: 'Bima R.',  role: 'Web Engineering',      initials: 'BR' },
+  { name: 'Nadia K.', role: 'Creative Director',    initials: 'NK' },
+];
+---
+<BaseLayout
+  title="Tentang Kami"
+  description="Tentaklik adalah agensi digital marketing yang fokus pada hasil nyata — website, Google Ads, Meta Ads, dan konsultasi."
+  active="tentang"
+>
+  <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
+    <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">
+      <div>
+        <span class="eyebrow">Tentang Tentaklik</span>
+        <h1 style="font-size:48px;margin-top:18px;margin-bottom:18px;">
+          Kraken kecil yang serius soal <span style="color:var(--orange-500);">growth bisnis</span>.
+        </h1>
+        <p style="font-size:17px;color:var(--ink-500);max-width:540px;">
+          Tentaklik berdiri dari frustrasi: terlalu banyak agensi yang janji muluk, tapi hasilnya cuma laporan cantik. Kami pilih jalan beda — fokus angka yang berarti, eksekusi rapi, dan partnership jangka panjang.
+        </p>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <KrakenMascot size={300} />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Nilai yang Kami Pegang</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Tiga hal yang nggak bisa ditawar.</p>
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+        {values.map(v => (
+          <div class="card reveal">
+            <div style="width:50px;height:50px;border-radius:14px;background:var(--orange-100);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;" aria-hidden="true">{v.icon}</div>
+            <h3 style="font-size:18px;margin-bottom:8px;">{v.title}</h3>
+            <p style="font-size:14px;color:var(--ink-500);">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--bg-warm);">
+    <div class="container">
+      <h2 class="section-title">Tim Inti</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Orang-orang yang turun langsung di project kamu.</p>
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+        {team.map(t => (
+          <div class="card reveal" style="text-align:center;">
+            <div class="avatar" style="width:90px;height:90px;font-size:28px;margin:0 auto 14px;">{t.initials}</div>
+            <h3 style="font-size:16px;">{t.name}</h3>
+            <p style="font-size:13px;color:var(--ink-500);margin-top:4px;">{t.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner cta-banner-light reveal">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>Mau ngobrol soal bisnis Anda?</h3>
+          <p style="margin-top:8px;font-size:15px;color:var(--ink-700);">Konsultasi gratis 30 menit, tanpa hard-selling.</p>
+        </div>
+        <a href="/kontak" class="btn btn-primary">Konsultasi Gratis <ArrowRight size={14} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

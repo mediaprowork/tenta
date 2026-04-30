@@ -1,0 +1,76 @@
+---
+import ArrowRight from '../../icons/ArrowRight.astro';
+import { getCollection } from 'astro:content';
+
+const jobsCol = await getCollection('jobs');
+const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
+---
+<section id="apply" style="background:var(--bg-warm);">
+  <div class="container">
+    <div style="max-width:720px;margin:0 auto;">
+      <h2 class="section-title" style="text-align:center;">Form Lamaran</h2>
+      <p class="section-sub" style="margin-bottom:32px;text-align:center;">Isi data di bawah, tim HR kami akan respon dalam 3 hari kerja.</p>
+      <form id="karir-form" class="card" style="display:flex;flex-direction:column;gap:16px;padding:32px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="apply-name">Nama Lengkap *</label>
+            <input id="apply-name" name="name" required type="text" autocomplete="name" placeholder="Nama lengkap"/>
+          </div>
+          <div class="form-field">
+            <label for="apply-email">Email *</label>
+            <input id="apply-email" name="email" required type="email" autocomplete="email" placeholder="email@contoh.com"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="apply-phone">No. WhatsApp</label>
+            <input id="apply-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx"/>
+          </div>
+          <div class="form-field">
+            <label for="apply-role">Posisi yang Dilamar *</label>
+            <select id="apply-role" name="role" required>
+              <option value="">— Pilih posisi —</option>
+              {jobs.map(j => <option value={j.data.title}>{j.data.title}</option>)}
+              <option value="Open Application">Open Application (lainnya)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="apply-portfolio">Link Portfolio / CV</label>
+          <input id="apply-portfolio" name="portfolio" placeholder="Link Drive / LinkedIn / GitHub / Behance"/>
+        </div>
+        <div class="form-field">
+          <label for="apply-message">Cerita singkat tentang kamu</label>
+          <textarea id="apply-message" name="message" placeholder="Pengalaman terbaik, kenapa Tentaklik, atau apa pun yang ingin kami tahu..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:8px;justify-content:center;">
+          Kirim Lamaran <ArrowRight size={14} />
+        </button>
+        <p style="font-size:12.5px;color:var(--ink-500);text-align:center;margin-top:4px;">
+          Submit akan membuka WhatsApp dengan data lamaranmu sudah terisi.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const WA_NUMBER = import.meta.env.PUBLIC_WA_NUMBER ?? '6285177111104';
+  const form = document.getElementById('karir-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const get = (k: string) => String(fd.get(k) ?? '');
+      const msg =
+        `Halo Tentaklik, saya ingin melamar di Tentaklik:\n\n` +
+        `Nama: ${get('name')}\n` +
+        `Email: ${get('email')}\n` +
+        `Phone: ${get('phone')}\n` +
+        `Posisi: ${get('role')}\n` +
+        `Portfolio/CV: ${get('portfolio')}\n\n` +
+        `Catatan:\n${get('message')}`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    });
+  }
+</script>

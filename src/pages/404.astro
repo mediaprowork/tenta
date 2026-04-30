@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import KrakenMascot from '@components/brand/KrakenMascot.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+---
+<BaseLayout
+  title="404 — Halaman tidak ditemukan"
+  description="Halaman yang kamu cari tidak ada. Yuk balik ke beranda."
+  noindex={true}
+>
+  <section style="padding-top:80px;padding-bottom:80px;text-align:center;">
+    <div class="container" style="max-width:640px;">
+      <div style="display:flex;justify-content:center;margin-bottom:24px;">
+        <KrakenMascot size={260} animate={false} />
+      </div>
+      <h1 style="font-size:60px;margin-bottom:14px;color:var(--orange-500);">404</h1>
+      <h2 style="font-size:28px;margin-bottom:14px;">Halaman ini menyelam terlalu dalam.</h2>
+      <p style="font-size:16px;color:var(--ink-500);margin-bottom:32px;">URL yang kamu cari tidak ditemukan. Mungkin sudah dipindah, atau memang gak pernah ada.</p>
+      <a href="/" class="btn btn-primary">Balik ke Beranda <ArrowRight size={14} /></a>
+    </div>
+  </section>
+</BaseLayout>

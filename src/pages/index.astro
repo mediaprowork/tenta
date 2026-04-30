@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/sections/Hero.astro';
+import ServicesGrid from '@components/sections/ServicesGrid.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import Process from '@components/sections/Process.astro';
+import Testimonials from '@components/sections/Testimonials.astro';
+import CaseStudiesPreview from '@components/sections/CaseStudiesPreview.astro';
+import FAQ from '@components/sections/FAQ.astro';
+import FinalCTA from '@components/sections/FinalCTA.astro';
+import { faqJsonLd } from '@lib/seo';
+import { getCollection } from 'astro:content';
+
+const faqs = await getCollection('faqs');
+const jsonLd = [faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a })))];
+---
+<BaseLayout
+  title="Tentaklik — Website & Digital Ads Agency"
+  description="Tentaklik bantu bisnis lo tumbuh 10x lebih maju lewat website, Google Ads, Meta Ads, dan konsultasi digital marketing."
+  active="beranda"
+  preloadHero={true}
+  jsonLd={jsonLd}
+>
+  <Hero />
+  <ServicesGrid />
+  <CTABanner />
+  <Process />
+  <Testimonials />
+  <CaseStudiesPreview />
+  <FAQ />
+  <FinalCTA />
+</BaseLayout>

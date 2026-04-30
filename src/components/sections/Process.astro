@@ -1,0 +1,26 @@
+---
+const steps = [
+  { n: '01', title: 'Audit',     icon: '🔍', desc: 'Kami pelajari bisnis, target market, dan kondisi channel saat ini.' },
+  { n: '02', title: 'Strategi',  icon: '📋', desc: 'Susun arah kerja yang jelas, prioritas channel, dan KPI utama.' },
+  { n: '03', title: 'Eksekusi',  icon: '🚀', desc: 'Website, ads, creative, dan tracking dijalankan secara rapi.' },
+  { n: '04', title: 'Optimasi',  icon: '📊', desc: 'Evaluasi data, tingkatkan performa, dan scale yang sudah terbukti.' },
+];
+---
+<section style="background:var(--bg-warm);">
+  <div class="container">
+    <h2 class="section-title">Cara Kami Bekerja</h2>
+    <p class="section-sub" style="margin-bottom:40px;">Pendekatan terstruktur, bukan sekadar bikin asal jalan.</p>
+    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;">
+      {steps.map(s => (
+        <div class="process-step reveal">
+          <span class="process-num">{s.n}</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <h3 style="font-size:18px;">{s.title}</h3>
+            <span style="font-size:18px;" aria-hidden="true">{s.icon}</span>
+          </div>
+          <p style="font-size:13px;color:var(--ink-500);">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

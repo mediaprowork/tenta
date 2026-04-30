@@ -1,0 +1,20 @@
+---
+interface Feature { icon: string; title: string; desc: string; }
+interface Props { title: string; sub?: string; items: Feature[]; }
+const { title, sub, items } = Astro.props;
+---
+<section>
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    {sub && <p class="section-sub" style="margin-bottom:40px;">{sub}</p>}
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+      {items.map(it => (
+        <div class="card reveal">
+          <div style="width:44px;height:44px;border-radius:12px;background:var(--orange-100);display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:22px;" aria-hidden="true">{it.icon}</div>
+          <h3 style="font-size:18px;margin-bottom:8px;">{it.title}</h3>
+          <p style="font-size:14px;color:var(--ink-500);">{it.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

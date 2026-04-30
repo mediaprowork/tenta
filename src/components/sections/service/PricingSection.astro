@@ -1,0 +1,26 @@
+---
+interface Plan { name: string; tagline: string; price: string; unit: string; featured?: boolean; features: string[]; }
+interface Props { plans: Plan[]; }
+const { plans } = Astro.props;
+---
+<section id="pricing" style="background:var(--bg-warm);">
+  <div class="container">
+    <h2 class="section-title">Pilih Paket yang Sesuai</h2>
+    <p class="section-sub" style="margin-bottom:48px;">Transparan, no hidden fee. Bisa custom sesuai kebutuhan.</p>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;max-width:1100px;margin:0 auto;">
+      {plans.map(p => (
+        <div class={`pricing-card reveal ${p.featured ? 'featured' : ''}`}>
+          <div>
+            <h3 style="font-size:20px;">{p.name}</h3>
+            <p style="font-size:13px;color:var(--ink-500);margin-top:4px;">{p.tagline}</p>
+          </div>
+          <div class="price">{p.price}<small> {p.unit}</small></div>
+          <ul class="feat-list">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+          <a href="/kontak" class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`} style="justify-content:center;margin-top:auto;">Mulai Sekarang</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

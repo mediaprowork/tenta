@@ -1,0 +1,89 @@
+---
+import '@styles/global.css';
+import Header from '@components/layout/Header.astro';
+import Footer from '@components/layout/Footer.astro';
+import StickyWA from '@components/layout/StickyWA.astro';
+import { site } from '@data/site';
+import { organizationJsonLd } from '@lib/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
+  preloadHero?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = site.description,
+  image = site.defaultOgImage,
+  canonical,
+  noindex = false,
+  active = 'beranda',
+  preloadHero = false,
+  jsonLd = [],
+} = Astro.props;
+
+const fullTitle = title.includes('Tentaklik') ? title : `${title} — Tentaklik`;
+const url = new URL(Astro.url.pathname, site.url).toString();
+const canonicalUrl = canonical ?? url;
+const ogImage = image.startsWith('http') ? image : new URL(image, site.url).toString();
+
+const orgLd = organizationJsonLd();
+const allLd = [orgLd, ...jsonLd];
+---
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="id_ID" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {preloadHero && <link rel="preload" as="image" href="/assets/kraken-hero.png" fetchpriority="high" />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <Fragment set:html={allLd.map(ld => `<script type="application/ld+json">${JSON.stringify(ld)}</script>`).join('\n')} />
+  </head>
+  <body>
+    <Header active={active} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <StickyWA />
+
+    <script>
+      import { initReveal } from '@lib/reveal';
+      initReveal();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+---
+import TentaklikLogo from '../brand/TentaklikLogo.astro';
+import Instagram from '../icons/Instagram.astro';
+import Facebook from '../icons/Facebook.astro';
+import LinkedIn from '../icons/LinkedIn.astro';
+import WhatsApp from '../icons/WhatsApp.astro';
+import Email from '../icons/Email.astro';
+import Pin from '../icons/Pin.astro';
+import { site } from '@data/site';
+---
+<footer class="footer">
+  <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+    <div>
+      <div style="margin-bottom:14px;"><TentaklikLogo size={24} variant="white" /></div>
+      <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.description}</p>
+      <div style="display:flex;gap:12px;margin-top:18px;">
+        <a href={site.social.instagram} aria-label="Instagram" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Instagram size={16} /></a>
+        <a href={site.social.facebook} aria-label="Facebook" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Facebook size={16} /></a>
+        <a href={site.social.linkedin} aria-label="LinkedIn" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><LinkedIn size={16} /></a>
+      </div>
+    </div>
+    <div>
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="/services/website">Website Development</a></li>
+        <li><a href="/services/google-ads">Google Ads</a></li>
+        <li><a href="/services/meta-ads">Meta Ads</a></li>
+        <li><a href="/services/konsultasi">Konsultasi Digital Marketing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Perusahaan</h4>
+      <ul>
+        <li><a href="/tentang">Tentang Kami</a></li>
+        <li><a href="/case-study">Case Study</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/karir">Karir</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontak</h4>
+      <ul>
+        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> {site.phone}</li>
+        <li style="display:flex;align-items:center;gap:8px;"><Email size={14} /> {site.email}</li>
+        <li style="display:flex;align-items:center;gap:8px;"><Pin size={14} /> {site.address}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container partner-row" style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <span style="font-size:12px;color:var(--ink-300);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Official Partner</span>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <a href="https://www.google.com/partners/" target="_blank" rel="noopener noreferrer" aria-label="Google Partner" class="partner-logo">
+        <img src="/assets/partner-google.png" alt="Google Partner" loading="lazy"/>
+      </a>
+      <a href="https://www.facebook.com/business/partner-directory" target="_blank" rel="noopener noreferrer" aria-label="Meta Business Partner" class="partner-logo">
+        <img src="/assets/partner-meta.png" alt="Meta Business Partner" loading="lazy"/>
+      </a>
+    </div>
+  </div>
+  <div class="container" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:13px;color:var(--ink-300);flex-wrap:wrap;gap:12px;">
+    <span>© 2026 tentaklik. All rights reserved.</span>
+    <span>Built with 🐙 in Jakarta</span>
+  </div>
+</footer>

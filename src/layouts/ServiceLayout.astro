@@ -1,0 +1,60 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ServiceHero from '@components/sections/service/ServiceHero.astro';
+import FeaturesGrid from '@components/sections/service/FeaturesGrid.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import ServiceProcess from '@components/sections/service/ServiceProcess.astro';
+import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
+import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import KrakenMascot from '@components/brand/KrakenMascot.astro';
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+interface Props {
+  data: {
+    title: string;
+    titleAccent: string;
+    eyebrow: string;
+    desc: string;
+    icon: 'web' | 'google' | 'meta' | 'konsul';
+    features: { icon: string; title: string; desc: string }[];
+    plans: { name: string; tagline: string; price: string; unit: string; featured?: boolean; features: string[] }[];
+    process: { title: string; desc: string }[];
+    faqs: { q: string; a: string }[];
+    seo: { title: string; description: string };
+  };
+  slug: string;
+}
+
+const { data, slug } = Astro.props;
+const url = `${site.url}/services/${slug}`;
+const jsonLd = [
+  serviceJsonLd({ name: data.seo.title, description: data.seo.description, url }),
+  faqJsonLd(data.faqs),
+  breadcrumbJsonLd([
+    { name: 'Beranda',     url: site.url },
+    { name: 'Layanan',     url: `${site.url}/#layanan` },
+    { name: data.eyebrow,  url },
+  ]),
+];
+---
+<BaseLayout
+  title={data.seo.title}
+  description={data.seo.description}
+  active="layanan"
+  jsonLd={jsonLd}
+>
+  <ServiceHero
+    eyebrow={data.eyebrow}
+    title={data.title}
+    titleAccent={data.titleAccent}
+    desc={data.desc}
+  >
+    <KrakenMascot slot="illustration" size={320} />
+  </ServiceHero>
+  <FeaturesGrid title="Apa yang Kami Bawa" sub="Hal-hal kecil yang bikin hasil beda." items={data.features} />
+  <PricingSection plans={data.plans} />
+  <ServiceProcess steps={data.process} />
+  <ServiceFAQ items={data.faqs} />
+  <ServiceCTA />
+</BaseLayout>
