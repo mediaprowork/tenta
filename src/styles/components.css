@@ -1403,3 +1403,17 @@ img { max-width: 100%; height: auto; }
   .skeleton, .lazy-img-wrap:not(.loaded) { animation: none; }
   .lazy-img-wrap img { transition: none; opacity: 1; }
 }
+
+/* === Global kraken float animation (shared across pages) === */
+@keyframes krakenFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25%       { transform: translateY(-14px) rotate(0.8deg); }
+  75%       { transform: translateY(-6px) rotate(-0.5deg); }
+}
+.kraken-float {
+  animation: krakenFloat 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kraken-float { animation: none; }
+}

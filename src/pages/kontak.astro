@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import KrakenMini from '@components/brand/KrakenMini.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import WhatsApp from '@components/icons/WhatsApp.astro';
 import Email from '@components/icons/Email.astro';
@@ -30,8 +29,15 @@ import { site, waLink } from '@data/site';
 
       <!-- Left: contact info -->
       <div>
-        <div style="margin-bottom:32px;position:relative;">
-          <KrakenMini size={140} />
+        <div style="margin-bottom:32px;display:flex;justify-content:center;">
+          <img
+            src="/logo-icon.png"
+            alt="Tentaklik"
+            width="140"
+            height="140"
+            loading="lazy"
+            style="width:140px;height:auto;display:block;animation:krakenFloat 4.5s ease-in-out infinite;filter:drop-shadow(0 12px 24px rgba(255,107,26,0.20));"
+          />
         </div>
         <h3 style="font-size:22px;margin-bottom:18px;">Channel Lain</h3>
         <div style="display:flex;flex-direction:column;gap:14px;">
@@ -136,7 +142,7 @@ import { site, waLink } from '@data/site';
         <a href={waLink('Halo Tentaklik')} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
           Chat WhatsApp <ArrowRight size={14} />
         </a>
-        <div style="position:relative;"><KrakenMini size={110} /></div>
+        <div style="position:relative;"><img src="/logo-icon.png" alt="" aria-hidden="true" width="110" height="110" style="width:110px;height:auto;display:block;" /></div>
       </div>
     </div>
   </section>
@@ -191,3 +197,14 @@ import { site, waLink } from '@data/site';
     });
   }
 </script>
+
+<style>
+  @keyframes krakenFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25%       { transform: translateY(-12px) rotate(0.8deg); }
+    75%       { transform: translateY(-5px) rotate(-0.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    img[alt="Tentaklik"] { animation: none !important; }
+  }
+</style>
