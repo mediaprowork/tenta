@@ -1,6 +1,5 @@
 ---
 import TentaklikLogo from '../brand/TentaklikLogo.astro';
-import { waLink } from '@data/site';
 
 interface Props {
   active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
@@ -24,14 +23,15 @@ const links = [
 ---
 <header class="header" id="site-header">
   <div class="container nav">
-    <a href="/" style="display:flex;align-items:center;" aria-label="Tentaklik beranda">
+    <a href="/" style="display:flex;align-items:center;flex-shrink:0;" aria-label="Tentaklik beranda">
       <TentaklikLogo size={22} />
     </a>
 
-    <nav class="nav-links nav-links-right" aria-label="Navigasi utama">
+    <!-- Desktop nav — hidden on mobile via CSS -->
+    <nav class="nav-links nav-desktop" aria-label="Navigasi utama">
       <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
 
-      <!-- Layanan dengan dropdown -->
+      <!-- Layanan dropdown -->
       <div class="nav-dropdown-wrap" id="layanan-wrap">
         <button
           class={`nav-dropdown-trigger ${active === 'layanan' ? 'active' : ''}`}
@@ -41,7 +41,7 @@ const links = [
           type="button"
         >
           Layanan
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="nav-dropdown" id="layanan-menu" role="menu">
           {services.map(s => (
@@ -58,70 +58,74 @@ const links = [
       ))}
     </nav>
 
-    <!-- Burger only (mobile) -->
-    <div class="nav-right">
-      <button
-        class="nav-burger"
-        id="nav-burger"
-        aria-label="Buka menu"
-        aria-expanded="false"
-        aria-controls="mobile-drawer"
-        type="button"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile drawer -->
-  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
-    <div class="mobile-drawer-panel">
-      <nav class="mobile-drawer-links" aria-label="Navigasi mobile">
-        <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
-
-        <!-- Layanan expand di mobile -->
-        <div class="mobile-layanan">
-          <button class="mobile-layanan-trigger" type="button" aria-expanded="false">
-            Layanan
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="mobile-layanan-sub" hidden>
-            {services.map(s => (
-              <a href={s.href} class="mobile-sub-item">
-                <span aria-hidden="true">{s.icon}</span> {s.label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {links.filter(l => l.id !== 'beranda').map(l => (
-          <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
-        ))}
-      </nav>
-      <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
-        <a href={waLink('Halo Tentaklik, saya ingin konsultasi')} target="_blank" rel="noopener noreferrer" class="btn btn-wa" style="justify-content:center;">
-          Chat WhatsApp
-        </a>
-        <a href="/kontak" class="btn btn-primary" style="justify-content:center;">
-          Konsultasi Gratis
-        </a>
-      </div>
-    </div>
+    <!-- Burger (mobile only) -->
+    <button
+      class="nav-burger"
+      id="nav-burger"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+      type="button"
+    >
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
+<!-- Mobile drawer — OUTSIDE header, fixed to viewport -->
+<div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Menu navigasi" aria-hidden="true">
+  <div class="mobile-drawer-panel" id="mobile-drawer-panel">
+    <!-- Close button di dalam panel -->
+    <button class="drawer-close" id="drawer-close" type="button" aria-label="Tutup menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <nav class="mobile-drawer-links" aria-label="Navigasi mobile">
+      <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+
+      <!-- Layanan accordion -->
+      <div class="mobile-layanan">
+        <button class="mobile-layanan-trigger" type="button" aria-expanded="false">
+          Layanan
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-layanan-sub" hidden>
+          {services.map(s => (
+            <a href={s.href} class="mobile-sub-item">
+              <span aria-hidden="true">{s.icon}</span> {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {links.filter(l => l.id !== 'beranda').map(l => (
+        <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
+      ))}
+    </nav>
+
+  </div>
+</div>
+
 <style>
-  /* Nav links pushed to right */
-  .nav-links-right {
+  /* ─── Desktop nav: hidden on mobile, visible on desktop ─── */
+  .nav-desktop {
+    display: none; /* default hidden */
     margin-left: auto;
   }
-
-  /* Dropdown wrapper */
-  .nav-dropdown-wrap {
-    position: relative;
+  @media (min-width: 1101px) {
+    .nav-desktop { display: flex; }
+    .nav-burger  { display: none !important; }
   }
 
-  /* Trigger button looks like a nav link */
+  /* Burger visible on mobile */
+  .nav-burger {
+    display: flex;
+    margin-left: auto; /* push to right when nav-desktop is hidden */
+  }
+
+  /* ─── Desktop dropdown ─── */
+  .nav-dropdown-wrap { position: relative; }
+
   .nav-dropdown-trigger {
     display: flex;
     align-items: center;
@@ -136,6 +140,7 @@ const links = [
     cursor: pointer;
     position: relative;
     transition: color 0.15s;
+    white-space: nowrap;
   }
   .nav-dropdown-trigger:hover,
   .nav-dropdown-trigger.active { color: var(--orange-600); }
@@ -148,14 +153,9 @@ const links = [
     border-radius: 2px;
     background: var(--orange-500);
   }
-  .nav-dropdown-trigger .chevron {
-    transition: transform 0.2s ease;
-  }
-  .nav-dropdown-trigger[aria-expanded="true"] .chevron {
-    transform: rotate(180deg);
-  }
+  .chevron { transition: transform 0.2s ease; }
+  .nav-dropdown-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
-  /* Dropdown panel */
   .nav-dropdown {
     position: absolute;
     top: calc(100% + 12px);
@@ -170,31 +170,24 @@ const links = [
     display: none;
     flex-direction: column;
     gap: 2px;
-    z-index: 50;
+    z-index: 200;
   }
   .nav-dropdown.open { display: flex; }
-
-  /* Dropdown arrow */
   .nav-dropdown::before {
     content: "";
     position: absolute;
-    top: -6px;
-    left: 50%;
+    top: -6px; left: 50%;
     transform: translateX(-50%) rotate(45deg);
     width: 12px; height: 12px;
     background: white;
     border-left: 1px solid var(--ink-100);
     border-top: 1px solid var(--ink-100);
   }
-
   .nav-dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     padding: 10px 12px;
     border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 14px; font-weight: 500;
     color: var(--ink-700);
     transition: background 0.15s, color 0.15s;
     white-space: nowrap;
@@ -202,47 +195,96 @@ const links = [
   .nav-dropdown-item:hover { background: var(--orange-50); color: var(--orange-700); }
   .nav-dropdown-icon {
     font-size: 16px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
     background: var(--orange-100);
     border-radius: 8px;
     flex-shrink: 0;
   }
 
-  /* WA icon button */
-  .nav-wa-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 999px;
-    background: var(--orange-500);
-    color: white;
-    display: inline-flex;
+  /* ─── Mobile drawer ─── */
+  .mobile-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999; /* above everything */
+    background: rgba(14, 27, 42, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s;
+  }
+  .mobile-drawer.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-drawer-panel {
+    position: absolute;
+    top: 0; right: 0;
+    width: min(320px, 88vw);
+    height: 100%;
+    height: 100dvh; /* dynamic viewport height — handles iOS URL bar */
+    background: white;
+    padding: 20px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
+  }
+  .mobile-drawer.open .mobile-drawer-panel {
+    transform: translateX(0);
+  }
+
+  /* Close button */
+  .drawer-close {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    transition: background 0.15s, transform 0.15s;
-    flex-shrink: 0;
+    justify-content: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-700);
+    padding: 8px;
+    margin: 0 -8px 12px auto;
+    border-radius: 8px;
+    transition: background 0.15s;
   }
-  .nav-wa-btn:hover { background: var(--orange-600); transform: scale(1.05); }
+  .drawer-close:hover { background: var(--ink-50); }
 
-  /* Hide CTA buttons on mobile (burger shows them in drawer) */
-  .nav-cta { display: none; }
-  @media (min-width: 1101px) {
-    .nav-cta { display: inline-flex; }
-    .nav-wa-btn { display: inline-flex; }
+  /* Mobile links */
+  .mobile-drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
   }
-  @media (max-width: 1100px) {
-    .nav-wa-btn { display: none; }
+  .mobile-drawer-links > a {
+    padding: 14px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-700);
+    border-radius: 10px;
+    transition: background 0.15s, color 0.15s;
+    display: block;
+  }
+  .mobile-drawer-links > a:hover,
+  .mobile-drawer-links > a.active {
+    background: var(--orange-50);
+    color: var(--orange-600);
   }
 
-  /* Mobile layanan expand */
+  /* Mobile Layanan accordion */
   .mobile-layanan { display: flex; flex-direction: column; }
   .mobile-layanan-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     padding: 14px 12px;
     font: inherit;
     font-size: 16px;
@@ -256,10 +298,16 @@ const links = [
     transition: background 0.15s, color 0.15s;
   }
   .mobile-layanan-trigger:hover { background: var(--orange-50); color: var(--orange-600); }
-  .mobile-layanan-trigger svg { transition: transform 0.2s; }
+  .mobile-layanan-trigger svg { transition: transform 0.2s; flex-shrink: 0; }
   .mobile-layanan-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .mobile-layanan-trigger[aria-expanded="true"] { background: var(--orange-50); color: var(--orange-600); }
 
-  .mobile-layanan-sub { display: flex; flex-direction: column; padding-left: 12px; }
+  .mobile-layanan-sub {
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+    padding-bottom: 4px;
+  }
   .mobile-sub-item {
     display: flex;
     align-items: center;
@@ -275,72 +323,69 @@ const links = [
 </style>
 
 <script>
-  /* ── Scroll ── */
+  /* ── Scroll-aware header ── */
   const header = document.getElementById('site-header');
   function onScroll() {
     if (!header) return;
-    if (window.scrollY > 8) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+    header.classList.toggle('scrolled', window.scrollY > 8);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ── Desktop dropdown (Layanan) ── */
-  const trigger = document.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-  const menu = document.getElementById('layanan-menu');
+  /* ── Desktop dropdown ── */
+  const dropTrigger = document.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+  const dropMenu    = document.getElementById('layanan-menu');
+  const dropWrap    = dropTrigger?.closest('.nav-dropdown-wrap');
 
-  function openMenu() {
-    if (!trigger || !menu) return;
-    menu.classList.add('open');
-    trigger.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    if (!trigger || !menu) return;
-    menu.classList.remove('open');
-    trigger.setAttribute('aria-expanded', 'false');
-  }
+  function openDrop() { dropMenu?.classList.add('open'); dropTrigger?.setAttribute('aria-expanded','true'); }
+  function closeDrop() { dropMenu?.classList.remove('open'); dropTrigger?.setAttribute('aria-expanded','false'); }
 
-  if (trigger && menu) {
-    // Hover
-    const wrap = trigger.closest('.nav-dropdown-wrap');
-    wrap?.addEventListener('mouseenter', openMenu);
-    wrap?.addEventListener('mouseleave', closeMenu);
-
-    // Click toggle (touch / keyboard)
-    trigger.addEventListener('click', () => {
-      menu.classList.contains('open') ? closeMenu() : openMenu();
-    });
-
-    // Close on outside click
-    document.addEventListener('click', (e) => {
-      if (!wrap?.contains(e.target as Node)) closeMenu();
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // Close when a menu item is clicked
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  if (dropTrigger && dropMenu && dropWrap) {
+    dropWrap.addEventListener('mouseenter', openDrop);
+    dropWrap.addEventListener('mouseleave', closeDrop);
+    dropTrigger.addEventListener('click', () => dropMenu.classList.contains('open') ? closeDrop() : openDrop());
+    document.addEventListener('click', e => { if (!dropWrap.contains(e.target as Node)) closeDrop(); });
+    dropMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrop));
   }
 
   /* ── Mobile drawer ── */
-  const burger = document.getElementById('nav-burger');
-  const drawer = document.getElementById('mobile-drawer');
+  const burger  = document.getElementById('nav-burger');
+  const drawer  = document.getElementById('mobile-drawer');
+  const closeBtn = document.getElementById('drawer-close');
   let lastFocused: HTMLElement | null = null;
+  let savedScrollY = 0;
+
+  function lockScroll() {
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top      = `-${savedScrollY}px`;
+    document.body.style.width    = '100%';
+    document.body.style.overflowY = 'scroll'; /* keep scrollbar width */
+  }
+  function unlockScroll() {
+    document.body.style.position  = '';
+    document.body.style.top       = '';
+    document.body.style.width     = '';
+    document.body.style.overflowY = '';
+    window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+  }
 
   function openDrawer() {
     if (!burger || !drawer) return;
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    lockScroll();
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
     burger.classList.add('open');
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Tutup menu');
-    document.body.style.overflow = 'hidden';
-    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    drawer.querySelector<HTMLElement>('a, button')?.focus();
+    // Focus first focusable element in drawer
+    requestAnimationFrame(() => {
+      const first = drawer.querySelector<HTMLElement>('button, a[href]');
+      first?.focus();
+    });
   }
+
   function closeDrawer() {
     if (!burger || !drawer) return;
     drawer.classList.remove('open');
@@ -348,28 +393,35 @@ const links = [
     burger.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Buka menu');
-    document.body.style.overflow = '';
+    unlockScroll();
     lastFocused?.focus();
   }
 
   burger?.addEventListener('click', () => {
     drawer?.classList.contains('open') ? closeDrawer() : openDrawer();
   });
-  drawer?.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
-  drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+  closeBtn?.addEventListener('click', closeDrawer);
 
-  /* Mobile layanan expand */
-  const mobileTrigger = document.querySelector<HTMLButtonElement>('.mobile-layanan-trigger');
-  const mobileSub = document.querySelector<HTMLElement>('.mobile-layanan-sub');
-  mobileTrigger?.addEventListener('click', () => {
-    const open = mobileTrigger.getAttribute('aria-expanded') === 'true';
-    mobileTrigger.setAttribute('aria-expanded', open ? 'false' : 'true');
-    if (mobileSub) mobileSub.hidden = open;
+  // Backdrop click
+  drawer?.addEventListener('click', e => { if (e.target === drawer) closeDrawer(); });
+
+  // Close on nav link click
+  drawer?.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', closeDrawer));
+
+  /* Mobile Layanan accordion */
+  const mobTrigger = document.querySelector<HTMLButtonElement>('.mobile-layanan-trigger');
+  const mobSub     = document.querySelector<HTMLElement>('.mobile-layanan-sub');
+  mobTrigger?.addEventListener('click', () => {
+    const isOpen = mobTrigger.getAttribute('aria-expanded') === 'true';
+    mobTrigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    if (mobSub) mobSub.hidden = isOpen;
   });
 
+  /* Focus trap + Escape */
   function onKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape' && drawer?.classList.contains('open')) { closeDrawer(); return; }
-    if (e.key === 'Tab' && drawer?.classList.contains('open')) {
+    if (!drawer?.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeDrawer(); return; }
+    if (e.key === 'Tab') {
       const focusable = drawer.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
       );
@@ -381,8 +433,10 @@ const links = [
   }
   document.addEventListener('keydown', onKeydown);
 
+  /* Cleanup on page transition */
   document.addEventListener('astro:before-swap', () => {
     window.removeEventListener('scroll', onScroll);
     document.removeEventListener('keydown', onKeydown);
+    if (drawer?.classList.contains('open')) unlockScroll();
   }, { once: true });
 </script>

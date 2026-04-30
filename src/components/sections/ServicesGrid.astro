@@ -1,5 +1,6 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
+import LazyImage from '../ui/LazyImage.astro';
 
 const services = [
   { title: 'Website Development',           desc: 'Landing page, company profile, dan website yang fokus pada konversi.', slug: 'website',     icon: 'web' },
@@ -31,8 +32,8 @@ const services = [
                 <rect x="7" y="25" width="16" height="2" fill="var(--ink-200)"/>
               </svg>
             )}
-            {s.icon === 'google' && <img src="/assets/icon-google-ads.png" alt="" aria-hidden="true" style="width:40px;height:40px;object-fit:contain;display:block;" />}
-            {s.icon === 'meta' && <img src="/assets/icon-meta-ads.png" alt="" aria-hidden="true" style="width:42px;height:32px;object-fit:contain;display:block;" />}
+            {s.icon === 'google' && <LazyImage src="/assets/icon-google-ads.png" alt="" width={40} height={40} class="" />}
+            {s.icon === 'meta' && <LazyImage src="/assets/icon-meta-ads.png" alt="" width={42} height={32} class="" />}
             {s.icon === 'konsul' && (
               <svg width="36" height="36" viewBox="0 0 40 40" aria-hidden="true">
                 <circle cx="20" cy="20" r="14" fill="none" stroke="var(--orange-500)" stroke-width="2"/>

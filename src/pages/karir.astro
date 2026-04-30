@@ -5,6 +5,7 @@ import KarirJobList from '@components/sections/karir/KarirJobList.astro';
 import KarirProcess from '@components/sections/karir/KarirProcess.astro';
 import KarirApplyForm from '@components/sections/karir/KarirApplyForm.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
+import LazyImage from '@components/ui/LazyImage.astro';
 ---
 <BaseLayout
   title="Karir"
@@ -26,8 +27,8 @@ import ArrowRight from '@components/icons/ArrowRight.astro';
           <a href="#proses" class="btn btn-ghost">Cara Apply</a>
         </div>
       </div>
-      <div style="display:flex;justify-content:center;">
-        <img src="/assets/kraken-hero.png" alt="Tentaklik kraken" width="380" height="380" loading="lazy" style="width:100%;max-width:380px;height:auto;display:block;"/>
+      <div style="display:flex;justify-content:center;width:100%;max-width:380px;margin:0 auto;">
+        <LazyImage src="/assets/kraken-hero.png" alt="Tentaklik kraken" width={380} height={304} />
       </div>
     </div>
   </section>

@@ -1132,3 +1132,208 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display), 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
+
+/* ===========================================
+   MOBILE / TABLET / SMALL MOBILE OPTIMIZATIONS
+   Comprehensive overrides + fluid typography
+   =========================================== */
+
+/* Image scaling default */
+img { max-width: 100%; height: auto; }
+
+/* Touch-friendly minimum tap target */
+@media (max-width: 1100px) {
+  .btn { min-height: 44px; }
+  a, button { -webkit-tap-highlight-color: rgba(255, 122, 26, 0.15); }
+}
+
+/* === Tablet & smaller (≤ 1100px) === */
+@media (max-width: 1100px) {
+  /* Hero — stack & resize */
+  .hero-mascot-wrap { min-height: auto !important; }
+  .hero-mascot, .hero-mascot-wrap img { max-width: 380px !important; margin: 0 auto; }
+
+  /* Section title */
+  .section-title { font-size: clamp(28px, 4vw, 36px); }
+
+  /* CTA banners */
+  .cta-banner { padding: 32px 28px; }
+  .cta-banner h3 { font-size: clamp(20px, 3vw, 26px) !important; }
+  .cta-banner-clean, .cta-banner-light { padding: 32px 32px; }
+}
+
+/* === Mobile-large (≤ 760px) — overrides === */
+@media (max-width: 760px) {
+  /* Container & section spacing */
+  .container { padding: 0 18px; }
+  section { padding: 44px 0; }
+
+  /* Hero */
+  .hero-wrap { padding: 24px 0 36px !important; }
+  .hero-grid { gap: 24px !important; padding-top: 8px; }
+  .hero-title { font-size: clamp(26px, 7vw, 32px) !important; line-height: 1.2 !important; }
+  .hero-feature-strip { grid-template-columns: 1fr 1fr !important; padding: 16px !important; gap: 12px !important; }
+  .hero-feature-cell { padding: 10px !important; gap: 10px !important; }
+  .hero-feature-icon { width: 36px !important; height: 36px !important; }
+
+  /* Hero mascot smaller */
+  .hero-mascot, .hero-mascot-wrap img { max-width: 280px !important; }
+  .kraken-float { animation-duration: 3.5s; }
+
+  /* Section titles */
+  .section-title { font-size: clamp(24px, 6vw, 28px); }
+  .section-sub { font-size: 14.5px; padding: 0 8px; }
+
+  /* Cards padding shrink */
+  .card { padding: 20px; }
+  .service-card, .testi-card, .pricing-card { padding: 22px; }
+  .process-step { padding: 18px; }
+
+  /* Service cards & grids — single col, fluid */
+  section [style*="grid-template-columns:repeat(3"],
+  section [style*="grid-template-columns:repeat(4"],
+  section [style*="gridTemplateColumns:'repeat(3"],
+  section [style*="gridTemplateColumns:'repeat(4"] {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* 2-column inline grids stack */
+  section [style*="grid-template-columns:1fr 1.3fr"],
+  section [style*="grid-template-columns:1.2fr 1fr"],
+  section [style*="grid-template-columns:1.1fr 1fr"],
+  section [style*="grid-template-columns:1.4fr 1fr"],
+  section [style*="grid-template-columns:1.05fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Forms — 2-col inputs stack */
+  form [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    min-height: 44px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+  .form-field textarea { min-height: 110px; }
+
+  /* CTA banners stack */
+  .cta-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center;
+    padding: 24px 22px !important;
+    gap: 16px !important;
+  }
+  .cta-banner h3 { font-size: 20px !important; }
+  .cta-banner p { font-size: 14px !important; }
+  .cta-banner .btn { width: 100%; justify-content: center; }
+  .cta-banner-mascot { width: 200px !important; margin: 0 auto !important; }
+
+  /* Filter buttons (case study) — smaller */
+  .filter-btn { padding: 7px 14px !important; font-size: 13px !important; }
+
+  /* Job card — tighter */
+  .job-card-head { padding: 18px 18px !important; gap: 12px !important; }
+  .job-card-body { padding: 18px 18px 22px !important; }
+  .job-card-head h3 { font-size: 17px !important; }
+
+  /* Footer — 4-col → 2-col */
+  .footer .container { grid-template-columns: 1fr 1fr !important; gap: 24px 16px !important; }
+  .footer { padding: 44px 0 20px; margin-top: 40px; }
+
+  /* Sticky WA */
+  .sticky-wa { right: 16px; bottom: 16px; width: 52px; height: 52px; }
+
+  /* Avatar tim section — kompak */
+  .avatar { width: 56px !important; height: 56px !important; font-size: 18px !important; }
+
+  /* Spark dekoratif sembunyi di mobile */
+  .spark { display: none; }
+
+  /* Hero stat-disc dll */
+  .hero-float-roas, .hero-float-trend, .hero-stat-disc, .hero-peach-blob { display: none; }
+}
+
+/* === Mobile-small (≤ 480px) === */
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+  section { padding: 36px 0; }
+
+  /* Hero — single col tighter */
+  .hero-feature-strip { grid-template-columns: 1fr !important; padding: 14px !important; }
+  .hero-mascot, .hero-mascot-wrap img { max-width: 240px !important; }
+  .hero-title { font-size: 24px !important; }
+
+  /* Section text */
+  .section-title { font-size: 22px; }
+  .section-sub { font-size: 14px; }
+
+  /* Cards */
+  .card { padding: 18px; }
+  .service-card, .testi-card, .pricing-card { padding: 18px; }
+
+  /* Footer single col */
+  .footer .container { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .partner-row { justify-content: center !important; }
+
+  /* CTA banner mascot */
+  .cta-banner-mascot { width: 160px !important; }
+
+  /* Pricing card */
+  .price { font-size: 28px; }
+
+  /* Avatar tim */
+  .avatar { width: 48px !important; height: 48px !important; font-size: 16px !important; }
+
+  /* Tag pills smaller */
+  .job-pill { font-size: 11px; padding: 3px 8px; }
+}
+
+/* === Very small mobile (≤ 360px) === */
+@media (max-width: 360px) {
+  .container { padding: 0 12px; }
+  section { padding: 32px 0; }
+  .hero-title { font-size: 22px !important; }
+  .section-title { font-size: 20px; }
+  .btn { padding: 11px 16px; font-size: 13.5px; }
+  .card, .service-card, .testi-card, .pricing-card { padding: 16px; }
+  .filter-btn { padding: 6px 12px !important; font-size: 12.5px !important; }
+}
+
+/* === Skeleton loader (lazy image placeholder) === */
+.skeleton, .lazy-img-wrap:not(.loaded) {
+  background: linear-gradient(90deg, #ececef 0%, #f6f6f8 50%, #ececef 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.lazy-img-wrap {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border-radius: inherit;
+}
+.lazy-img-wrap.loaded {
+  animation: none;
+  background: transparent;
+}
+.lazy-img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.lazy-img-wrap img.loaded { opacity: 1; }
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton, .lazy-img-wrap:not(.loaded) { animation: none; }
+  .lazy-img-wrap img { transition: none; opacity: 1; }
+}
