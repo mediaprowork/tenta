@@ -337,15 +337,33 @@ const links = [
   const dropMenu    = document.getElementById('layanan-menu');
   const dropWrap    = dropTrigger?.closest('.nav-dropdown-wrap');
 
-  function openDrop() { dropMenu?.classList.add('open'); dropTrigger?.setAttribute('aria-expanded','true'); }
-  function closeDrop() { dropMenu?.classList.remove('open'); dropTrigger?.setAttribute('aria-expanded','false'); }
+  let _closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function openDrop() {
+    if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
+    dropMenu?.classList.add('open');
+    dropTrigger?.setAttribute('aria-expanded', 'true');
+  }
+  function closeDrop(immediate = false) {
+    if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
+    if (immediate) {
+      dropMenu?.classList.remove('open');
+      dropTrigger?.setAttribute('aria-expanded', 'false');
+    } else {
+      _closeTimer = setTimeout(() => {
+        _closeTimer = null;
+        dropMenu?.classList.remove('open');
+        dropTrigger?.setAttribute('aria-expanded', 'false');
+      }, 200);
+    }
+  }
 
   if (dropTrigger && dropMenu && dropWrap) {
     dropWrap.addEventListener('mouseenter', openDrop);
-    dropWrap.addEventListener('mouseleave', closeDrop);
-    dropTrigger.addEventListener('click', () => dropMenu.classList.contains('open') ? closeDrop() : openDrop());
-    document.addEventListener('click', e => { if (!dropWrap.contains(e.target as Node)) closeDrop(); });
-    dropMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrop));
+    dropWrap.addEventListener('mouseleave', () => closeDrop(false));
+    dropTrigger.addEventListener('click', () => dropMenu.classList.contains('open') ? closeDrop(true) : openDrop());
+    document.addEventListener('click', e => { if (!dropWrap.contains(e.target as Node)) closeDrop(true); });
+    dropMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeDrop(true)));
   }
 
   /* ── Mobile drawer ── */

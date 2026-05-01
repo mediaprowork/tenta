@@ -6,7 +6,7 @@ import TikTok from '../icons/TikTok.astro';
 import WhatsApp from '../icons/WhatsApp.astro';
 import Email from '../icons/Email.astro';
 import Pin from '../icons/Pin.astro';
-import { site } from '@data/site';
+import { site, waLink } from '@data/site';
 ---
 <footer class="footer">
   <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
@@ -39,7 +39,7 @@ import { site } from '@data/site';
     <div>
       <h4>Kontak</h4>
       <ul>
-        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> {site.phone}</li>
+        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> <a href={waLink('Halo Tentaklik! Saya ingin menanyakan lebih lanjut mengenai layanan digital marketing Anda. Bisa bantu saya?')} target="_blank" rel="noopener noreferrer" style="color:inherit;transition:color 0.15s;" onmouseover="this.style.color='var(--orange-300)'" onmouseout="this.style.color=''">{site.phone}</a></li>
         <li style="display:flex;align-items:center;gap:8px;"><Email size={14} /> {site.email}</li>
         <li style="display:flex;align-items:center;gap:8px;"><Pin size={14} /> {site.address}</li>
       </ul>

@@ -5,7 +5,7 @@ desc: "Universitas Islam Sultan Agung Semarang — digital campaign penerimaan m
 tags: ["Google Ads", "Meta Ads"]
 industry: "Education"
 period: "1 tahun"
-cover: "/assets/case-study/daftarunissula.webp"
+cover: "/assets/case-study/daftarunissula.png"
 publishDate: 2026-04-15
 ---
 
