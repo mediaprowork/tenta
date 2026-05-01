@@ -1,4 +1,4 @@
-# Tentaklik
+# Tentaklik.com
 
 Production website for Tentaklik (Astro 6 + Bun).
 
