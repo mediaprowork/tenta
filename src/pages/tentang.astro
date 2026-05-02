@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
-import LazyImage from '@components/ui/LazyImage.astro';
+import { Picture } from 'astro:assets';
+import krakenHero from '@/assets/kraken-hero.png';
 import { aboutPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
+
+import g1 from '@/assets/galeri/1.jpg';
+import g2 from '@/assets/galeri/2.jpg';
+import g3 from '@/assets/galeri/3.jpg';
+import g4 from '@/assets/galeri/4.jpg';
+import g5 from '@/assets/galeri/5.jpg';
+import g6 from '@/assets/galeri/6.jpg';
+import g7 from '@/assets/galeri/7.jpg';
+import g8 from '@/assets/galeri/8.jpg';
+import g9 from '@/assets/galeri/9.jpeg';
+import g10 from '@/assets/galeri/10.jpeg';
+const galeriImages = [g1, g2, g3, g4, g5, g6, g7, g8, g9, g10];
 
 const values = [
   { icon: '🎯', title: 'Hasil > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
@@ -16,19 +29,6 @@ const team = [
   { name: 'Hanuf',        role: 'Lead Performance',   initials: 'HN' },
   { name: 'Ibnu Fateeh',  role: 'Web Engineering',    initials: 'IF' },
   { name: 'Dephi Jhons',  role: 'Creative Director',  initials: 'DJ' },
-];
-
-const galeriImages = [
-  '/assets/galeri/1.png',
-  '/assets/galeri/2.png',
-  '/assets/galeri/3.png',
-  '/assets/galeri/4.png',
-  '/assets/galeri/5.png',
-  '/assets/galeri/6.png',
-  '/assets/galeri/7.png',
-  '/assets/galeri/8.png',
-  '/assets/galeri/9.jpeg',
-  '/assets/galeri/10.jpeg',
 ];
 
 const url = `${site.url}/tentang`;
@@ -60,14 +60,16 @@ const jsonLd = [
       </div>
       <div style="display:flex;justify-content:center;">
         <div class="tentang-kraken-wrap">
-          <LazyImage
-            src="/assets/kraken-hero.png"
+          <Picture
+            src={krakenHero}
             alt="Tentaklik kraken"
-            width={560}
-            height={448}
+            formats={['avif', 'webp']}
+            widths={[400, 560, 800]}
+            sizes="(max-width: 760px) min(480px, 92vw), 560px"
             loading="eager"
             fetchpriority="high"
-            imgClass="tentang-kraken"
+            decoding="sync"
+            class="tentang-kraken"
           />
         </div>
       </div>
@@ -112,9 +114,17 @@ const jsonLd = [
       <h2 class="section-title">Galeri</h2>
       <p class="section-sub" style="margin-bottom:36px;">Sekilas aktivitas dan suasana tim Tentaklik.</p>
       <div class="galeri-grid">
-        {galeriImages.map((src, i) => (
+        {galeriImages.map((img, i) => (
           <div class={`galeri-item reveal ${i === 0 || i === 7 ? 'galeri-wide' : ''}`}>
-            <LazyImage src={src} alt={`Tentaklik galeri ${i + 1}`} class="galeri-lazy-wrap" />
+            <Picture
+              src={img}
+              alt={`Tentaklik galeri ${i + 1}`}
+              formats={['avif', 'webp']}
+              widths={[200, 400, 600, 800]}
+              sizes="(max-width: 480px) 50vw, (max-width: 760px) 50vw, (max-width: 1100px) 33vw, 25vw"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         ))}
       </div>
@@ -139,7 +149,7 @@ const jsonLd = [
       position: relative;
       background: var(--ink-50);
     }
-    .galeri-item :global(.galeri-lazy-wrap) {
+    .galeri-item :global(picture) {
       width: 100%;
       height: 100%;
       display: block;
@@ -149,7 +159,7 @@ const jsonLd = [
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.45s ease, opacity 0.4s ease;
+      transition: transform 0.45s ease;
     }
     .galeri-item::after {
       content: "";
@@ -188,21 +198,22 @@ const jsonLd = [
     .tentang-kraken-wrap {
       width: 100%;
       max-width: 560px;
+      animation: krakenFloat 4.5s ease-in-out infinite;
+      will-change: transform;
     }
+    .tentang-kraken-wrap :global(picture) { display: block; width: 100%; }
     :global(.tentang-kraken) {
       width: 100%;
       height: auto;
       display: block;
-      animation: krakenFloat 4.5s ease-in-out infinite;
       filter: drop-shadow(0 20px 40px rgba(255, 107, 26, 0.18));
-      will-change: transform;
     }
     @keyframes krakenFloat {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       25%       { transform: translateY(-14px) rotate(0.8deg); }
       75%       { transform: translateY(-6px) rotate(-0.5deg); }
     }
-    @media (prefers-reduced-motion: reduce) { :global(.tentang-kraken) { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .tentang-kraken-wrap { animation: none; } }
     @media (max-width: 760px) { .tentang-kraken-wrap { max-width: min(480px, 92vw); } }
   </style>
 

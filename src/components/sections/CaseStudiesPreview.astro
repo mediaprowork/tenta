@@ -20,7 +20,7 @@ const cases = allCases
               <LazyImage src={c.data.cover} alt={c.data.brand} class="cs-cover-lazy" />
             ) : (
               <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;border-bottom:1px dashed var(--orange-300);">
-                <span style="font-family:'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+                <span style="font-family:'Inter Variable', 'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
               </div>
             )}
           </div>
@@ -30,7 +30,7 @@ const cases = allCases
               {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
             </div>
             <h3 style="font-size:18px;margin:0;">{c.data.brand}</h3>
-            <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
+            <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
             <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.6;">{c.data.desc}</p>
           </div>
         </div>

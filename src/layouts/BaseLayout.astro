@@ -13,7 +13,7 @@ interface Props {
   canonical?: string;
   noindex?: boolean;
   active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
-  preloadHero?: boolean;
+  preloadHeroSrc?: string;
   jsonLd?: Record<string, unknown>[];
   keywords?: string[];
   pageType?: 'website' | 'article' | 'profile';
@@ -28,7 +28,7 @@ const {
   canonical,
   noindex = false,
   active = 'beranda',
-  preloadHero = false,
+  preloadHeroSrc,
   jsonLd = [],
   keywords,
   pageType = 'website',
@@ -63,8 +63,8 @@ const cspContent = [
   "frame-ancestors 'self'",
   "form-action 'self' https://wa.me",
   "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com data:",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self' data:",
   "img-src 'self' data: blob:",
   "connect-src 'self'",
   "manifest-src 'self'",
@@ -155,14 +155,9 @@ const cspContent = [
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    {preloadHero && <link rel="preload" as="image" href="/assets/kraken-hero.png" fetchpriority="high" />}
+    {preloadHeroSrc && <link rel="preload" as="image" href={preloadHeroSrc} fetchpriority="high" type="image/avif" />}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://wa.me" />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <Fragment set:html={allLd.map(ld => `<script type="application/ld+json">${safeJsonLd(ld)}</script>`).join('\n')} />
   </head>

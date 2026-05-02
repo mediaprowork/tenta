@@ -1,7 +1,8 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
 import Star from '../icons/Star.astro';
-import LazyImage from '../ui/LazyImage.astro';
+import { Picture } from 'astro:assets';
+import krakenHero from '@/assets/kraken-hero.png';
 
 const features = [
   { icon: 'target',  title: 'Strategi Terukur',     sub: 'Setiap rupiah punya tujuan dan KPI yang jelas.' },
@@ -50,11 +51,12 @@ const features = [
     </div>
     <div class="hero-mascot-wrap" id="hero-kraken-wrap" style="position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;">
       <div class="kraken-float" style="width:100%;max-width:560px;">
-        <LazyImage
-          src="/assets/kraken-hero.png"
+        <Picture
+          src={krakenHero}
           alt="Tentaklik kraken mascot"
-          width={560}
-          height={448}
+          formats={['avif', 'webp']}
+          widths={[400, 560, 800]}
+          sizes="(max-width: 760px) min(480px, 95vw), 560px"
           loading="eager"
           fetchpriority="high"
           decoding="sync"

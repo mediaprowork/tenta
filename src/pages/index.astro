@@ -11,6 +11,8 @@ import FinalCTA from '@components/sections/FinalCTA.astro';
 import { faqJsonLd, itemListJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import krakenHeroSrc from '@/assets/kraken-hero.png';
 
 const faqs = await getCollection('faqs');
 const services = await getCollection('services');
@@ -27,12 +29,14 @@ const jsonLd = [
   faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a }))),
   itemListJsonLd(serviceItems, 'Layanan Digital Marketing Tentaklik'),
 ];
+
+const heroPreload = await getImage({ src: krakenHeroSrc, format: 'avif', width: 800 });
 ---
 <BaseLayout
   title="Tentaklik — Agensi Digital Marketing Semarang | Website, Google Ads, Meta Ads"
   description="Tentaklik adalah agensi digital marketing Semarang yang bantu bisnis tumbuh 10x lewat jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi digital marketing untuk UMKM dan brand di Indonesia."
   active="beranda"
-  preloadHero={true}
+  preloadHeroSrc={heroPreload.src}
   jsonLd={jsonLd}
   keywords={[
     'jasa digital marketing semarang',
