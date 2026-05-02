@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import { Picture } from 'astro:assets';
-import krakenHero from '@/assets/kraken-hero.png';
 import { aboutPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 
@@ -60,17 +59,28 @@ const jsonLd = [
       </div>
       <div style="display:flex;justify-content:center;">
         <div class="tentang-kraken-wrap">
-          <Picture
-            src={krakenHero}
-            alt="Tentaklik kraken"
-            formats={['avif', 'webp']}
-            widths={[400, 560, 800]}
-            sizes="(max-width: 760px) min(480px, 92vw), 560px"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="tentang-kraken"
-          />
+          <picture>
+            <source
+              type="image/avif"
+              srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w, /assets/kraken-hero.avif 1200w"
+              sizes="(max-width: 760px) min(480px, 92vw), 560px"
+            />
+            <source
+              type="image/webp"
+              srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w, /assets/kraken-hero.webp 1200w"
+              sizes="(max-width: 760px) min(480px, 92vw), 560px"
+            />
+            <img
+              src="/assets/kraken-hero.png"
+              alt="Tentaklik kraken"
+              width="1200"
+              height="960"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="tentang-kraken"
+            />
+          </picture>
         </div>
       </div>
     </div>
