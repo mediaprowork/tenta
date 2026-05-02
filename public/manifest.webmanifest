@@ -1,0 +1,19 @@
+{
+  "name": "Tentaklik — Website & Digital Ads Agency",
+  "short_name": "Tentaklik",
+  "description": "Agensi digital marketing Semarang untuk jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi digital marketing.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#FF6B1A",
+  "background_color": "#FFFFFF",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "marketing"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

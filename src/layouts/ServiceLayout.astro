@@ -36,8 +36,20 @@ const serviceImages: Record<string, string> = {
 const imgSrc = serviceImages[data.icon];
 
 const url = `${site.url}/services/${slug}`;
+const serviceKeywordMap: Record<string, string[]> = {
+  'website':     ['jasa pembuatan website', 'jasa website semarang', 'web developer indonesia', 'jasa landing page', 'jasa company profile', 'jasa e-commerce'],
+  'google-ads':  ['jasa google ads', 'google ads specialist', 'jasa iklan google', 'jasa search ads', 'performance max indonesia', 'jasa youtube ads'],
+  'meta-ads':    ['jasa meta ads', 'jasa facebook ads', 'jasa instagram ads', 'meta ads specialist', 'jasa iklan facebook', 'jasa iklan instagram'],
+  'konsultasi':  ['konsultasi digital marketing', 'audit digital marketing', 'konsultan marketing online', 'strategi marketing digital'],
+};
 const jsonLd = [
-  serviceJsonLd({ name: data.seo.title, description: data.seo.description, url }),
+  serviceJsonLd({
+    name: data.seo.title,
+    description: data.seo.description,
+    url,
+    serviceType: data.eyebrow,
+    plans: data.plans.map(p => ({ name: p.name, price: p.price })),
+  }),
   faqJsonLd(data.faqs),
   breadcrumbJsonLd([
     { name: 'Beranda',    url: site.url },
@@ -51,6 +63,7 @@ const jsonLd = [
   description={data.seo.description}
   active="layanan"
   jsonLd={jsonLd}
+  keywords={serviceKeywordMap[slug] ?? [data.eyebrow.toLowerCase()]}
 >
   <ServiceHero
     eyebrow={data.eyebrow}

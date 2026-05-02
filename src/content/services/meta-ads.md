@@ -39,6 +39,6 @@ faqs:
   - { q: "Akun saya pernah kena restrict, masih bisa bantu?", a: "Bisa. Kami audit dulu pelanggaran yang terjadi, fix issue, dan bantu appeal kalau memungkinkan." }
   - { q: "Apakah produksi creative include?", a: "Static creative (image + copy) included. Video / UGC produksi tergantung paket — bisa diskusi tambahan." }
 seo:
-  title: "Meta Ads Specialist — Tentaklik"
-  description: "Jasa Facebook & Instagram Ads: setup, creative testing, audience layering, dan optimasi funnel untuk bisnis Indonesia."
+  title: "Jasa Meta Ads — Facebook & Instagram Ads Specialist Indonesia | Tentaklik"
+  description: "Jasa Meta Ads (Facebook & Instagram Ads) profesional Indonesia: setup Pixel + CAPI, creative testing, audience layering, dan optimasi funnel dari awareness sampai sales untuk bisnis di Semarang & seluruh Indonesia."
 ---

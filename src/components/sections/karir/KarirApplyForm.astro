@@ -10,21 +10,29 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
     <div style="max-width:720px;margin:0 auto;">
       <h2 class="section-title" style="text-align:center;">Form Lamaran</h2>
       <p class="section-sub" style="margin-bottom:32px;text-align:center;">Isi data di bawah, tim HR kami akan respon dalam 3 hari kerja.</p>
-      <form id="karir-form" class="card" style="display:flex;flex-direction:column;gap:16px;padding:32px;">
+      <form id="karir-form" class="card" style="display:flex;flex-direction:column;gap:16px;padding:32px;" autocomplete="on" novalidate>
+        <div id="karir-error" style="display:none;padding:14px;background:#FEE2E2;color:#B91C1C;border-radius:10px;font-size:14px;font-weight:600;" role="alert" aria-live="polite"></div>
+
+        <!-- Honeypot — hidden from humans -->
+        <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+          <label for="apply-website">Website (jangan diisi)</label>
+          <input id="apply-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
           <div class="form-field">
             <label for="apply-name">Nama Lengkap *</label>
-            <input id="apply-name" name="name" required type="text" autocomplete="name" placeholder="Nama lengkap"/>
+            <input id="apply-name" name="name" required type="text" autocomplete="name" placeholder="Nama lengkap" maxlength="100" pattern="[\p{L}\p{M}\s.\-']{2,100}"/>
           </div>
           <div class="form-field">
             <label for="apply-email">Email *</label>
-            <input id="apply-email" name="email" required type="email" autocomplete="email" placeholder="email@contoh.com"/>
+            <input id="apply-email" name="email" required type="email" autocomplete="email" placeholder="email@contoh.com" maxlength="254"/>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
           <div class="form-field">
             <label for="apply-phone">No. WhatsApp</label>
-            <input id="apply-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx"/>
+            <input id="apply-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx" maxlength="20" pattern="[0-9+\-\s()]{6,20}"/>
           </div>
           <div class="form-field">
             <label for="apply-role">Posisi yang Dilamar *</label>
@@ -37,11 +45,11 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
         </div>
         <div class="form-field">
           <label for="apply-portfolio">Link Portfolio / CV</label>
-          <input id="apply-portfolio" name="portfolio" placeholder="Link Drive / LinkedIn / GitHub / Behance"/>
+          <input id="apply-portfolio" name="portfolio" type="url" inputmode="url" placeholder="Link Drive / LinkedIn / GitHub / Behance" maxlength="300"/>
         </div>
         <div class="form-field">
           <label for="apply-message">Cerita singkat tentang kamu</label>
-          <textarea id="apply-message" name="message" placeholder="Pengalaman terbaik, kenapa Tentaklik, atau apa pun yang ingin kami tahu..."></textarea>
+          <textarea id="apply-message" name="message" placeholder="Pengalaman terbaik, kenapa Tentaklik, atau apa pun yang ingin kami tahu..." maxlength="2000"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-top:8px;justify-content:center;">
           Kirim Lamaran <ArrowRight size={14} />
@@ -55,22 +63,64 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
 </section>
 
 <script>
-  const WA_NUMBER = import.meta.env.PUBLIC_WA_NUMBER ?? '6285177111104';
+  const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285177111104';
+  const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
   const form = document.getElementById('karir-form') as HTMLFormElement | null;
-  if (form) {
+  const errBox = document.getElementById('karir-error');
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+  const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
+  const URL_RE = /^https?:\/\/[^\s<>"']{4,300}$/i;
+  const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
+  const MIN_MS_BEFORE_SUBMIT = 1500;
+  const MIN_MS_BETWEEN_SUBMITS = 4000;
+  const formLoadedAt = Date.now();
+  let lastSubmitAt = 0;
+
+  function clip(v: string, n: number): string {
+    return v.replace(CTRL_RE, ' ').slice(0, n).trim();
+  }
+  function showErr(text: string) {
+    if (!errBox) return;
+    errBox.textContent = text;
+    errBox.style.display = 'block';
+    setTimeout(() => { if (errBox) errBox.style.display = 'none'; }, 5000);
+  }
+
+  if (form && WA_NUMBER) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      const get = (k: string) => String(fd.get(k) ?? '');
+
+      if (String(fd.get('website') ?? '').length > 0) return;
+      const now = Date.now();
+      if (now - formLoadedAt < MIN_MS_BEFORE_SUBMIT) { showErr('Tunggu sebentar sebelum mengirim.'); return; }
+      if (now - lastSubmitAt < MIN_MS_BETWEEN_SUBMITS) { showErr('Terlalu cepat — coba lagi sebentar.'); return; }
+
+      const name      = clip(String(fd.get('name')      ?? ''), 100);
+      const email     = clip(String(fd.get('email')     ?? ''), 254);
+      const phone     = clip(String(fd.get('phone')     ?? ''),  20);
+      const role      = clip(String(fd.get('role')      ?? ''), 100);
+      const portfolio = clip(String(fd.get('portfolio') ?? ''), 300);
+      const message   = clip(String(fd.get('message')   ?? ''), 2000);
+
+      if (!NAME_RE.test(name))   { showErr('Nama tidak valid (2–100 karakter huruf).'); return; }
+      if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
+      if (phone && !PHONE_RE.test(phone)) { showErr('Nomor WhatsApp tidak valid.'); return; }
+      if (!role)                 { showErr('Pilih posisi yang dilamar.'); return; }
+      if (portfolio && !URL_RE.test(portfolio)) { showErr('Link portfolio harus berupa URL http(s) yang valid.'); return; }
+
+      lastSubmitAt = now;
       const msg =
         `Halo Tentaklik, saya ingin melamar di Tentaklik:\n\n` +
-        `Nama: ${get('name')}\n` +
-        `Email: ${get('email')}\n` +
-        `Phone: ${get('phone')}\n` +
-        `Posisi: ${get('role')}\n` +
-        `Portfolio/CV: ${get('portfolio')}\n\n` +
-        `Catatan:\n${get('message')}`;
+        `Nama: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n` +
+        `Posisi: ${role}\n` +
+        `Portfolio/CV: ${portfolio}\n\n` +
+        `Catatan:\n${message}`;
       window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      form.reset();
     });
   }
 </script>

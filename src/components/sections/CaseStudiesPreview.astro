@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import LazyImage from '../ui/LazyImage.astro';
 
 const allCases = await getCollection('caseStudies');
 const cases = allCases
@@ -16,13 +17,7 @@ const cases = allCases
           <!-- Cover image -->
           <div class="cs-cover">
             {c.data.cover ? (
-              <img
-                src={c.data.cover}
-                alt={c.data.brand}
-                loading="lazy"
-                decoding="async"
-                style="width:100%;height:100%;object-fit:cover;display:block;"
-              />
+              <LazyImage src={c.data.cover} alt={c.data.brand} class="cs-cover-lazy" />
             ) : (
               <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;border-bottom:1px dashed var(--orange-300);">
                 <span style="font-family:'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
@@ -51,5 +46,16 @@ const cases = allCases
     overflow: hidden;
     flex-shrink: 0;
     background: var(--orange-50);
+  }
+  .cs-cover :global(.cs-cover-lazy) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .cs-cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 </style>

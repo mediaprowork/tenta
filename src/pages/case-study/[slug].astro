@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
-import { breadcrumbJsonLd } from '@lib/seo';
+import { breadcrumbJsonLd, articleJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 
@@ -16,19 +16,35 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const url = `${site.url}/case-study/${entry.id}`;
+const publishedIso = entry.data.publishDate.toISOString();
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Beranda',    url: site.url },
     { name: 'Case Study', url: `${site.url}/case-study` },
     { name: entry.data.brand, url },
   ]),
+  articleJsonLd({
+    title: `${entry.data.brand} — ${entry.data.metric}`,
+    description: entry.data.desc,
+    url,
+    image: entry.data.cover,
+    datePublished: entry.data.publishDate,
+    section: entry.data.industry ?? 'Case Study',
+    keywords: [...entry.data.tags, entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
+  }),
 ];
+const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Case Study Tentaklik`;
 ---
 <BaseLayout
-  title={`${entry.data.brand} — ${entry.data.metric}`}
+  title={metaTitle}
   description={entry.data.desc}
   active="case"
   jsonLd={jsonLd}
+  image={entry.data.cover ?? site.defaultOgImage}
+  pageType="article"
+  publishedTime={publishedIso}
+  modifiedTime={publishedIso}
+  keywords={[...entry.data.tags, entry.data.brand.toLowerCase(), 'case study', 'tentaklik']}
 >
   <section style="padding-top:56px;padding-bottom:24px;background:var(--bg-warm);">
     <div class="container" style="max-width:820px;">

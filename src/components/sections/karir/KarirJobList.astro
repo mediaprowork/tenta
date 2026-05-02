@@ -1,6 +1,5 @@
 ---
 import ArrowRight from '../../icons/ArrowRight.astro';
-import WhatsApp from '../../icons/WhatsApp.astro';
 import { getCollection } from 'astro:content';
 import { waLink } from '@data/site';
 
@@ -24,7 +23,12 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
               </div>
               <p style="font-size:14.5px;color:var(--ink-500);margin:0;">{j.data.summary}</p>
             </div>
-            <span class="job-card-toggle" aria-hidden="true">+</span>
+            <span class="job-card-toggle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </span>
           </button>
           <div class="job-card-body" hidden>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
@@ -39,7 +43,7 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
                 Apply Posisi Ini <ArrowRight size={14} />
               </a>
               <a href={waLink(`Halo Tentaklik, saya tertarik dengan posisi ${j.data.title}`)} target="_blank" rel="noopener noreferrer" class="btn btn-wa">
-                <WhatsApp size={16} /> Tanya via WhatsApp
+                Tanya via WhatsApp
               </a>
             </div>
           </div>
@@ -54,18 +58,15 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
     btn.addEventListener('click', () => {
       const card = btn.closest('[data-job-card]') as HTMLElement | null;
       const body = card?.querySelector<HTMLElement>('.job-card-body');
-      const toggle = btn.querySelector<HTMLElement>('.job-card-toggle');
-      if (!card || !body || !toggle) return;
+      if (!card || !body) return;
       const isOpen = card.classList.contains('open');
       if (isOpen) {
         card.classList.remove('open');
         body.hidden = true;
-        toggle.textContent = '+';
         btn.setAttribute('aria-expanded', 'false');
       } else {
         card.classList.add('open');
         body.hidden = false;
-        toggle.textContent = '−';
         btn.setAttribute('aria-expanded', 'true');
       }
     });

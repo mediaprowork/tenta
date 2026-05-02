@@ -39,6 +39,6 @@ faqs:
   - { q: "Bisa konsultasi 1-on-1 saja, tanpa paket?", a: "Bisa via Quick Audit (Rp 2jt/sesi). Kalau butuh full strategy, Growth Strategy lebih lengkap." }
   - { q: "Apakah hasil audit dijamin meningkatkan revenue?", a: "Audit & strategi memberi peta jalan. Hasil revenue tergantung eksekusi — kami juga bisa bantu jalankan kalau Anda mau." }
 seo:
-  title: "Konsultasi Digital Marketing — Tentaklik"
-  description: "Konsultasi digital marketing: audit funnel, strategi channel, dan roadmap 90 hari untuk pertumbuhan bisnis Anda."
+  title: "Konsultasi Digital Marketing Indonesia — Audit & Strategi 90 Hari | Tentaklik"
+  description: "Konsultasi digital marketing untuk bisnis di Semarang & seluruh Indonesia: audit funnel, strategi channel mix, roadmap 90 hari, dan rekomendasi tools — actionable, bukan teori."
 ---

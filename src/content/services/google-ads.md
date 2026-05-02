@@ -39,6 +39,6 @@ faqs:
   - { q: "Berapa cepat bisa lihat hasil?", a: "Search ads bisa langsung dapat lead di minggu pertama. PMax butuh 14-30 hari untuk learning phase." }
   - { q: "Apakah ada kontrak?", a: "Minimum komitmen 3 bulan agar optimasi punya runway. Setelah itu bulanan, bisa cancel kapan saja." }
 seo:
-  title: "Google Ads Specialist — Tentaklik"
-  description: "Jasa Google Ads professional: Search, Display, PMax, YouTube. Setup, tracking, dan optimasi mingguan untuk bisnis Indonesia."
+  title: "Jasa Google Ads Specialist Semarang & Indonesia — Tentaklik"
+  description: "Jasa Google Ads profesional di Semarang & seluruh Indonesia: Search, Display, Performance Max, dan YouTube Ads. Setup tracking GA4, audit akun, dan optimasi mingguan agar setiap rupiah menghasilkan."
 ---

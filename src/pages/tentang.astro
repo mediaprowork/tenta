@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
+import LazyImage from '@components/ui/LazyImage.astro';
+import { aboutPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
 
 const values = [
   { icon: '🎯', title: 'Hasil > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
@@ -27,11 +30,22 @@ const galeriImages = [
   '/assets/galeri/9.jpeg',
   '/assets/galeri/10.jpeg',
 ];
+
+const url = `${site.url}/tentang`;
+const jsonLd = [
+  aboutPageJsonLd({ url }),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Tentang Kami', url },
+  ]),
+];
 ---
 <BaseLayout
-  title="Tentang Kami"
-  description="Tentaklik adalah agensi digital marketing yang fokus pada hasil nyata — website, Google Ads, Meta Ads, dan konsultasi."
+  title="Tentang Tentaklik — Agensi Digital Marketing Semarang"
+  description="Tentaklik adalah agensi digital marketing Semarang yang fokus pada hasil nyata — jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi untuk UMKM dan brand di Indonesia."
   active="tentang"
+  jsonLd={jsonLd}
+  keywords={['tentang tentaklik', 'agensi digital marketing semarang', 'tim tentaklik', 'profil agensi', 'digital agency semarang']}
 >
   <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
     <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">
@@ -45,14 +59,17 @@ const galeriImages = [
         </p>
       </div>
       <div style="display:flex;justify-content:center;">
-        <img
-          src="/assets/kraken-hero.png"
-          alt="Tentaklik kraken"
-          class="tentang-kraken"
-          width="560"
-          height="448"
-          loading="eager"
-        />
+        <div class="tentang-kraken-wrap">
+          <LazyImage
+            src="/assets/kraken-hero.png"
+            alt="Tentaklik kraken"
+            width={560}
+            height={448}
+            loading="eager"
+            fetchpriority="high"
+            imgClass="tentang-kraken"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -97,7 +114,7 @@ const galeriImages = [
       <div class="galeri-grid">
         {galeriImages.map((src, i) => (
           <div class={`galeri-item reveal ${i === 0 || i === 7 ? 'galeri-wide' : ''}`}>
-            <img src={src} alt={`Tentaklik galeri ${i + 1}`} loading="lazy" decoding="async" />
+            <LazyImage src={src} alt={`Tentaklik galeri ${i + 1}`} class="galeri-lazy-wrap" />
           </div>
         ))}
       </div>
@@ -122,12 +139,17 @@ const galeriImages = [
       position: relative;
       background: var(--ink-50);
     }
-    .galeri-item img {
+    .galeri-item :global(.galeri-lazy-wrap) {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .galeri-item :global(img) {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.45s ease;
+      transition: transform 0.45s ease, opacity 0.4s ease;
     }
     .galeri-item::after {
       content: "";
@@ -138,7 +160,7 @@ const galeriImages = [
       border-radius: inherit;
       opacity: 0;
     }
-    .galeri-item:hover img { transform: scale(1.06); }
+    .galeri-item:hover :global(img) { transform: scale(1.06); }
     .galeri-item:hover::after { opacity: 1; }
 
     @media (max-width: 1100px) {
@@ -163,9 +185,12 @@ const galeriImages = [
       }
     }
 
-    .tentang-kraken {
+    .tentang-kraken-wrap {
       width: 100%;
       max-width: 560px;
+    }
+    :global(.tentang-kraken) {
+      width: 100%;
       height: auto;
       display: block;
       animation: krakenFloat 4.5s ease-in-out infinite;
@@ -177,8 +202,8 @@ const galeriImages = [
       25%       { transform: translateY(-14px) rotate(0.8deg); }
       75%       { transform: translateY(-6px) rotate(-0.5deg); }
     }
-    @media (prefers-reduced-motion: reduce) { .tentang-kraken { animation: none; } }
-    @media (max-width: 760px) { .tentang-kraken { max-width: min(480px, 92vw); } }
+    @media (prefers-reduced-motion: reduce) { :global(.tentang-kraken) { animation: none; } }
+    @media (max-width: 760px) { .tentang-kraken-wrap { max-width: min(480px, 92vw); } }
   </style>
 
   <section style="padding-bottom:24px;">

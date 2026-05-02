@@ -8,18 +8,44 @@ import Testimonials from '@components/sections/Testimonials.astro';
 import CaseStudiesPreview from '@components/sections/CaseStudiesPreview.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import FinalCTA from '@components/sections/FinalCTA.astro';
-import { faqJsonLd } from '@lib/seo';
+import { faqJsonLd, itemListJsonLd } from '@lib/seo';
+import { site } from '@data/site';
 import { getCollection } from 'astro:content';
 
 const faqs = await getCollection('faqs');
-const jsonLd = [faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a })))];
+const services = await getCollection('services');
+
+const serviceItems = services
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map(s => ({
+    name: s.data.seo.title,
+    url: `${site.url}/services/${s.id}`,
+    description: s.data.seo.description,
+  }));
+
+const jsonLd = [
+  faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a }))),
+  itemListJsonLd(serviceItems, 'Layanan Digital Marketing Tentaklik'),
+];
 ---
 <BaseLayout
-  title="Tentaklik — Website & Digital Ads Agency"
-  description="Tentaklik bantu bisnis lo tumbuh 10x lebih maju lewat website, Google Ads, Meta Ads, dan konsultasi digital marketing."
+  title="Tentaklik — Agensi Digital Marketing Semarang | Website, Google Ads, Meta Ads"
+  description="Tentaklik adalah agensi digital marketing Semarang yang bantu bisnis tumbuh 10x lewat jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi digital marketing untuk UMKM dan brand di Indonesia."
   active="beranda"
   preloadHero={true}
   jsonLd={jsonLd}
+  keywords={[
+    'jasa digital marketing semarang',
+    'agensi digital marketing semarang',
+    'jasa pembuatan website semarang',
+    'jasa google ads',
+    'jasa meta ads',
+    'jasa facebook ads',
+    'jasa instagram ads',
+    'konsultan digital marketing',
+    'agensi iklan online indonesia',
+    'tentaklik',
+  ]}
 >
   <Hero />
   <ServicesGrid />

@@ -2,17 +2,38 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import KrakenMini from '@components/brand/KrakenMini.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
+import LazyImage from '@components/ui/LazyImage.astro';
 import { getCollection } from 'astro:content';
+import { breadcrumbJsonLd, itemListJsonLd } from '@lib/seo';
+import { site } from '@data/site';
 
 const allCases = (await getCollection('caseStudies')).sort((a, b) =>
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
+
+const url = `${site.url}/case-study`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Case Study', url },
+  ]),
+  itemListJsonLd(
+    allCases.map(c => ({
+      name: `${c.data.brand} — ${c.data.metric}`,
+      url: `${site.url}/case-study/${c.id}`,
+      description: c.data.desc,
+    })),
+    'Case Study Tentaklik',
+  ),
+];
 ---
 <BaseLayout
-  title="Case Study"
-  description="Kumpulan project yang kami kerjakan — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya."
+  title="Case Study Tentaklik — Hasil Nyata Klien Digital Marketing"
+  description="Kumpulan case study Tentaklik: hasil nyata Google Ads, Meta Ads, dan website klien — angka sebenarnya, periode jelas, dan strategi di baliknya."
   active="case"
+  jsonLd={jsonLd}
+  keywords={['case study tentaklik', 'portofolio digital marketing', 'hasil google ads', 'hasil meta ads', 'case study website']}
 >
   <section style="padding-top:56px;padding-bottom:32px;background:var(--bg-warm);">
     <div class="container" style="text-align:center;position:relative;">
@@ -40,8 +61,7 @@ const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
             <!-- Cover -->
             <div class="cs-cover">
               {c.data.cover ? (
-                <img src={c.data.cover} alt={c.data.brand} loading="lazy" decoding="async"
-                  style="width:100%;height:100%;object-fit:cover;display:block;" />
+                <LazyImage src={c.data.cover} alt={c.data.brand} class="cs-cover-lazy" />
               ) : (
                 <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;">
                   <span style="font-family:'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
@@ -105,10 +125,21 @@ const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
     flex-shrink: 0;
     background: var(--orange-50);
   }
+  .cs-cover :global(.cs-cover-lazy) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .cs-cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
   .cs-card { display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
   .cs-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .cs-cover img { transition: transform 0.4s ease; }
-  .cs-card:hover .cs-cover img { transform: scale(1.04); }
+  .cs-card:hover .cs-cover :global(img) { transform: scale(1.04); }
 </style>
 
 <script>

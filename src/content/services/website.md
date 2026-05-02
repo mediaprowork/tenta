@@ -39,6 +39,6 @@ faqs:
   - { q: "Bagaimana sistem pembayaran?", a: "DP 50% di awal, 30% saat development selesai, 20% saat go-live. Bisa diskusi kalau perlu cicilan lebih halus." }
   - { q: "Apa yang membedakan dari template?", a: "Custom desain, copywriting yang dioptimasi, integrasi tracking lengkap, dan support pasca-launch — bukan hanya tampilan." }
 seo:
-  title: "Website Development — Tentaklik"
-  description: "Jasa pembuatan website profesional untuk bisnis: landing page, company profile, e-commerce. Fast, mobile-first, SEO-ready."
+  title: "Jasa Pembuatan Website Profesional Semarang & Indonesia — Tentaklik"
+  description: "Jasa pembuatan website profesional untuk bisnis di Semarang & Indonesia: landing page, company profile, hingga e-commerce. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata."
 ---

@@ -6,11 +6,37 @@ import KarirProcess from '@components/sections/karir/KarirProcess.astro';
 import KarirApplyForm from '@components/sections/karir/KarirApplyForm.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import LazyImage from '@components/ui/LazyImage.astro';
+import { jobPostingJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import { getCollection } from 'astro:content';
+
+const jobs = await getCollection('jobs');
+const url = `${site.url}/karir`;
+const datePosted = new Date().toISOString().slice(0, 10);
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Karir', url },
+  ]),
+  ...jobs.map(j => jobPostingJsonLd({
+    title: j.data.title,
+    description: `${j.data.summary} Persyaratan: ${j.data.requirements.join('; ')}.`,
+    employmentType: j.data.type,
+    location: j.data.location,
+    datePosted,
+    level: j.data.level,
+    skills: j.data.tags as unknown as string[],
+    url: `${url}#${j.data.slug}`,
+  })),
+];
 ---
 <BaseLayout
-  title="Karir"
-  description="Gabung jadi tentakel baru di Tentaklik. Lihat lowongan terbuka untuk Web Developer, Meta Ads, Google Ads, TikTok Ads, dan Customer Specialist."
+  title="Karir di Tentaklik — Lowongan Digital Marketing & Web Developer"
+  description="Lowongan kerja di Tentaklik: Web Developer, Meta Ads Specialist, Google Ads Specialist, TikTok Ads, dan Customer Specialist. Gabung tim agensi digital marketing yang serius soal hasil."
   active="karir"
+  jsonLd={jsonLd}
+  keywords={['lowongan kerja tentaklik', 'karir digital marketing', 'lowongan web developer semarang', 'lowongan meta ads', 'lowongan google ads specialist', 'karir agensi digital']}
 >
   <section style="padding-top:56px;padding-bottom:48px;background:var(--bg-warm);position:relative;overflow:hidden;">
     <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">

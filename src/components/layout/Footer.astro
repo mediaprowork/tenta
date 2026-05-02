@@ -39,7 +39,7 @@ import { site, waLink } from '@data/site';
     <div>
       <h4>Kontak</h4>
       <ul>
-        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> <a href={waLink('Halo Tentaklik! Saya ingin menanyakan lebih lanjut mengenai layanan digital marketing Anda. Bisa bantu saya?')} target="_blank" rel="noopener noreferrer" style="color:inherit;transition:color 0.15s;" onmouseover="this.style.color='var(--orange-300)'" onmouseout="this.style.color=''">{site.phone}</a></li>
+        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> <a href={waLink('Halo Tentaklik! Saya ingin menanyakan lebih lanjut mengenai layanan digital marketing Anda. Bisa bantu saya?')} target="_blank" rel="noopener noreferrer" class="footer-wa-link">{site.phone}</a></li>
         <li style="display:flex;align-items:center;gap:8px;"><Email size={14} /> {site.email}</li>
         <li style="display:flex;align-items:center;gap:8px;"><Pin size={14} /> {site.address}</li>
       </ul>
@@ -60,3 +60,14 @@ import { site, waLink } from '@data/site';
     <span>© 2026 tentaklik. All rights reserved.</span>
   </div>
 </footer>
+
+<style>
+  .footer-wa-link {
+    color: inherit;
+    transition: color 0.15s;
+  }
+  .footer-wa-link:hover,
+  .footer-wa-link:focus-visible {
+    color: var(--orange-300);
+  }
+</style>
