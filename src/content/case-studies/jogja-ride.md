@@ -1,7 +1,7 @@
 ---
 brand: "Jogja Ride"
-metric: "6000+ Penyewa"
-desc: "Jasa rental kendaraan di Yogyakarta — website booking + Google Ads search yang mengubah pencarian wisatawan jadi penyewa langsung."
+metric: "10.000+ Penyewa"
+desc: "Kami membantu Rental Motor 99 Jogja mendatangkan lebih dari 10.000 penyewa motor melalui website yang rapi dan SEO-friendly. Website dioptimasi sampai ranking halaman 1 Google, didukung Google Search Ads untuk menargetkan wisatawan yang butuh motor saat itu juga. Hasilnya, traffic website meningkat drastis dalam beberapa waktu."
 tags: ["Website", "Google Ads"]
 industry: "Travel"
 period: "8 bulan"

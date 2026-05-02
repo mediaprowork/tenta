@@ -1,7 +1,7 @@
 ---
 brand: "Emas Antam"
-metric: "6000+ Penjualan"
-desc: "Penjualan emas Antam online — landing page terpercaya + ads campaign yang mendorong ratusan transaksi dari buyer yang siap beli."
+metric: "500+ Transaksi"
+desc: "Kami membantu JualBeliAntam.com menghasilkan lebih dari 500 transaksi jual beli emas Antam melalui tiga pendekatan: redesign website yang bersih dan terpercaya, optimasi SEO untuk keyword bernilai tinggi, dan Google Search Ads yang menargetkan calon customer yang siap melakukan transaksi. Dalam transaksi jual beli emas, tampilan website adalah jaminan kepercayaan — dan kepercayaan adalah mata uang utama."
 tags: ["Website", "Google Ads", "Meta Ads"]
 industry: "Investment"
 period: "10 bulan"

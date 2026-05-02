@@ -1,7 +1,7 @@
 ---
 brand: "Unnisula"
 metric: "6.000+ Mahasiswa Baru"
-desc: "Universitas Islam Sultan Agung Semarang — digital campaign penerimaan mahasiswa baru yang menjangkau calon mahasiswa se-Indonesia lewat multi-channel ads."
+desc: "Kami membantu Unnisula mendatangkan lebih dari 6.000 pendaftar mahasiswa baru melalui empat pendekatan: redesign website yang lebih rapi dan fokus konversi, optimasi SEO sampai ranking halaman 1 Google, serta campaign Meta Ads dan Google Search Ads yang menjangkau calon mahasiswa se-Indonesia."
 tags: ["Google Ads", "Meta Ads"]
 industry: "Education"
 period: "1 tahun"

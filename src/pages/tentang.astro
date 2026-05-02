@@ -9,10 +9,23 @@ const values = [
 ];
 
 const team = [
-  { name: 'Aldi P.',  role: 'Founder & Strategist', initials: 'AP' },
-  { name: 'Sari W.',  role: 'Lead Performance',     initials: 'SW' },
-  { name: 'Bima R.',  role: 'Web Engineering',      initials: 'BR' },
-  { name: 'Nadia K.', role: 'Creative Director',    initials: 'NK' },
+  { name: 'Endah W.',     role: 'Founder',            initials: 'EW' },
+  { name: 'Hanuf',        role: 'Lead Performance',   initials: 'HN' },
+  { name: 'Ibnu Fateeh',  role: 'Web Engineering',    initials: 'IF' },
+  { name: 'Dephi Jhons',  role: 'Creative Director',  initials: 'DJ' },
+];
+
+const galeriImages = [
+  '/assets/galeri/1.png',
+  '/assets/galeri/2.png',
+  '/assets/galeri/3.png',
+  '/assets/galeri/4.png',
+  '/assets/galeri/5.png',
+  '/assets/galeri/6.png',
+  '/assets/galeri/7.png',
+  '/assets/galeri/8.png',
+  '/assets/galeri/9.jpeg',
+  '/assets/galeri/10.jpeg',
 ];
 ---
 <BaseLayout
@@ -82,9 +95,9 @@ const team = [
       <h2 class="section-title">Galeri</h2>
       <p class="section-sub" style="margin-bottom:36px;">Sekilas aktivitas dan suasana tim Tentaklik.</p>
       <div class="galeri-grid">
-        {[1,2,3,4,5,6,7].map(n => (
-          <div class={`galeri-item reveal ${n === 1 ? 'galeri-wide' : ''}`}>
-            <img src={`/assets/galeri/${n}.png`} alt={`Tentaklik galeri ${n}`} loading="lazy" decoding="async" />
+        {galeriImages.map((src, i) => (
+          <div class={`galeri-item reveal ${i === 0 || i === 7 ? 'galeri-wide' : ''}`}>
+            <img src={src} alt={`Tentaklik galeri ${i + 1}`} loading="lazy" decoding="async" />
           </div>
         ))}
       </div>
@@ -95,12 +108,12 @@ const team = [
     /* Galeri */
     .galeri-grid {
       display: grid;
-      /* Desktop: image 1 wide (col-span 2) + image 2, then 4 images in 4 cols */
+      /* Desktop: 4 cols, image 1 & 8 wide for balanced 3-row layout */
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 220px 220px;
+      grid-auto-rows: 220px;
       gap: 14px;
     }
-    /* Image 1 spans 2 columns */
+    /* Wide images span 2 columns */
     .galeri-wide { grid-column: span 2; }
 
     .galeri-item {
@@ -131,21 +144,21 @@ const team = [
     @media (max-width: 1100px) {
       .galeri-grid {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 200px 200px;
+        grid-auto-rows: 200px;
       }
       .galeri-wide { grid-column: span 2; }
     }
     @media (max-width: 760px) {
       .galeri-grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(3, 180px);
+        grid-auto-rows: 180px;
         gap: 10px;
       }
       .galeri-wide { grid-column: span 2; }
     }
     @media (max-width: 480px) {
       .galeri-grid {
-        grid-template-rows: repeat(3, 150px);
+        grid-auto-rows: 150px;
         gap: 8px;
       }
     }
