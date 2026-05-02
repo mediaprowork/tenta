@@ -5,7 +5,7 @@ desc: "Kami membantu Unnisula mendatangkan lebih dari 6.000 pendaftar mahasiswa 
 tags: ["Google Ads", "Meta Ads"]
 industry: "Education"
 period: "1 tahun"
-cover: "/assets/case-study/daftarunissula.png"
+cover: "../../assets/case-study/daftarunissula.png"
 publishDate: 2026-04-15
 ---
 

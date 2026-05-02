@@ -34,14 +34,14 @@ const services = defineCollection({
 
 const caseStudies = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/case-studies' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     brand: z.string(),
     metric: z.string(),
     desc: z.string(),
     tags: z.array(z.string()),
     industry: z.string().optional(),
     period: z.string().optional(),
-    cover: z.string().optional(),
+    cover: image().optional(),
     publishDate: z.coerce.date(),
   }),
 });

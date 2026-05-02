@@ -1,5 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { Picture } from 'astro:assets';
+import imgWeb    from '@/assets/services/webdev.png';
+import imgGoogle from '@/assets/services/google.png';
+import imgMeta   from '@/assets/services/meta.png';
+import imgKonsul from '@/assets/services/konsul.png';
 import ServiceHero from '@components/sections/service/ServiceHero.astro';
 import FeaturesGrid from '@components/sections/service/FeaturesGrid.astro';
 import PricingSection from '@components/sections/service/PricingSection.astro';
@@ -27,12 +32,7 @@ interface Props {
 
 const { data, slug } = Astro.props;
 
-const serviceImages: Record<string, string> = {
-  web:    '/assets/services/webdev.png',
-  google: '/assets/services/google.png',
-  meta:   '/assets/services/meta.png',
-  konsul: '/assets/services/konsul.png',
-};
+const serviceImages = { web: imgWeb, google: imgGoogle, meta: imgMeta, konsul: imgKonsul };
 const imgSrc = serviceImages[data.icon];
 
 const url = `${site.url}/services/${slug}`;
@@ -73,14 +73,16 @@ const jsonLd = [
   >
     <!-- Ilustrasi per layanan dengan float animation (konsisten dengan beranda) -->
     <div slot="illustration" class="service-img-wrap">
-      <img
+      <Picture
         src={imgSrc}
         alt={data.eyebrow}
+        formats={['avif', 'webp']}
+        widths={[300, 420, 600]}
+        sizes="(max-width: 760px) min(340px, 85vw), 420px"
         class="service-hero-img"
-        width="420"
-        height="420"
         loading="eager"
         fetchpriority="high"
+        decoding="async"
       />
     </div>
   </ServiceHero>
@@ -102,9 +104,9 @@ const jsonLd = [
     filter: drop-shadow(0 24px 48px rgba(255, 107, 26, 0.18));
     will-change: transform;
   }
+  .service-img-wrap :global(picture) { display: block; width: 100%; max-width: 420px; }
   .service-hero-img {
     width: 100%;
-    max-width: 420px;
     height: auto;
     display: block;
   }
