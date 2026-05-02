@@ -933,8 +933,9 @@ html { scroll-behavior: smooth; }
    Comprehensive overrides + fluid typography
    =========================================== */
 
-/* Image scaling default */
+/* Image scaling defaults */
 img { max-width: 100%; height: auto; }
+picture { display: block; }
 
 /* Touch-friendly minimum tap target */
 @media (max-width: 1100px) {

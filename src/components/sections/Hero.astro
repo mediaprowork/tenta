@@ -102,6 +102,8 @@ const features = [
     filter: drop-shadow(0 28px 56px rgba(255, 107, 26, 0.22));
     will-change: transform;
   }
+  .kraken-float :global(picture) { display: block; width: 100%; }
+  .kraken-float :global(img) { width: 100%; height: auto; display: block; }
   @media (prefers-reduced-motion: reduce) {
     .kraken-float { animation: none; }
   }
