@@ -68,6 +68,10 @@ export const site = {
     bestRating: 5,
     worstRating: 1,
   },
+
+  verification: {
+    google: 'fhvj-kqOLg580zSOwN8stYGLH2TQeOUwKwFHJCJ2wbM',
+  },
 } as const;
 
 export function waLink(message = 'Halo Tentaklik') {
