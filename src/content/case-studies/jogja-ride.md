@@ -5,7 +5,7 @@ desc: "Kami membantu Rental Motor 99 Jogja mendatangkan lebih dari 10.000 penyew
 tags: ["Website", "Google Ads"]
 industry: "Travel"
 period: "8 bulan"
-cover: "../../assets/case-study/jogjaride.png"
+cover: "/assets/case-study/jogjaride.png"
 publishDate: 2026-04-10
 ---
 

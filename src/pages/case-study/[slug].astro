@@ -27,7 +27,7 @@ const jsonLd = [
     title: `${entry.data.brand} — ${entry.data.metric}`,
     description: entry.data.desc,
     url,
-    image: entry.data.cover?.src,
+    image: entry.data.cover,
     datePublished: entry.data.publishDate,
     section: entry.data.industry ?? 'Case Study',
     keywords: [...entry.data.tags, entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
@@ -40,7 +40,7 @@ const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Case Study Ten
   description={entry.data.desc}
   active="case"
   jsonLd={jsonLd}
-  image={entry.data.cover?.src ?? site.defaultOgImage}
+  image={entry.data.cover ?? site.defaultOgImage}
   pageType="article"
   publishedTime={publishedIso}
   modifiedTime={publishedIso}
