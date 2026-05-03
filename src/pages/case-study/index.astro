@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import KrakenMini from '@components/brand/KrakenMini.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
-import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { breadcrumbJsonLd, itemListJsonLd } from '@lib/seo';
 import { site } from '@data/site';
@@ -61,7 +60,11 @@ const jsonLd = [
             <!-- Cover -->
             <div class="cs-cover">
               {c.data.cover ? (
-                <Picture src={c.data.cover} alt={c.data.brand} widths={[400, 800]} formats={['avif', 'webp']} sizes="(max-width: 760px) 100vw, 33vw" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                <picture>
+                  <source type="image/avif" srcset={c.data.cover.replace('.png', '.avif')} />
+                  <source type="image/webp" srcset={c.data.cover.replace('.png', '.webp')} />
+                  <img src={c.data.cover} alt={c.data.brand} loading="lazy" decoding="async" width="800" height="450" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                </picture>
               ) : (
                 <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;">
                   <span style="font-family:'Inter Variable', 'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>

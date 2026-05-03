@@ -5,7 +5,7 @@ desc: "Kami membantu JualBeliAntam.com menghasilkan lebih dari 500 transaksi jua
 tags: ["Website", "Google Ads", "Meta Ads"]
 industry: "Investment"
 period: "10 bulan"
-cover: "../../assets/case-study/antam.png"
+cover: "/assets/case-study/antam.png"
 publishDate: 2026-04-05
 ---
 
