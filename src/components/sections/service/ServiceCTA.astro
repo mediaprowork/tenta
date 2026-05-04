@@ -3,12 +3,12 @@ import ArrowRight from '../../icons/ArrowRight.astro';
 ---
 <section style="padding-bottom:24px;">
   <div class="container">
-    <div class="cta-banner cta-banner-light reveal">
+    <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;position:relative;z-index:1;">
         <h3>Siap mulai project Anda?</h3>
-        <p style="margin-top:8px;font-size:15px;color:var(--ink-700);">Konsultasi gratis 30 menit untuk memetakan kebutuhan dan estimasi.</p>
+        <p style="margin-top:8px;font-size:15px;opacity:0.95;">Konsultasi gratis 30 menit untuk memetakan kebutuhan dan estimasi.</p>
       </div>
-      <a href="/kontak" class="btn btn-primary" onclick="zaraz.track('generate_lead')">Mulai Sekarang <ArrowRight size={14} /></a>
+      <a href="/kontak" class="btn btn-ghost" onclick="zaraz.track('generate_lead')">Mulai Sekarang <ArrowRight size={14} /></a>
     </div>
   </div>
 </section>
