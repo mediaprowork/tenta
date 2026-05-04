@@ -1,5 +1,6 @@
 ---
 import TentaklikLogo from '../brand/TentaklikLogo.astro';
+import ServiceIcon from '../icons/ServiceIcon.astro';
 
 interface Props {
   active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
@@ -7,10 +8,10 @@ interface Props {
 const { active = 'beranda' } = Astro.props;
 
 const services = [
-  { label: 'Website Development',          href: '/services/website',     icon: '🌐' },
-  { label: 'Google Ads',                   href: '/services/google-ads',  icon: '📈' },
-  { label: 'Meta Ads',                     href: '/services/meta-ads',    icon: '📲' },
-  { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: '🧭' },
+  { label: 'Website Development',          href: '/services/website',     icon: 'code' as const },
+  { label: 'Google Ads',                   href: '/services/google-ads',  icon: 'google' as const },
+  { label: 'Meta Ads',                     href: '/services/meta-ads',    icon: 'meta' as const },
+  { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: 'lightbulb' as const },
 ];
 
 const links = [
@@ -46,7 +47,7 @@ const links = [
         <div class="nav-dropdown" id="layanan-menu" role="menu">
           {services.map(s => (
             <a href={s.href} class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dropdown-icon" aria-hidden="true">{s.icon}</span>
+              <span class="nav-dropdown-icon" aria-hidden="true"><ServiceIcon type={s.icon} size={16} /></span>
               {s.label}
             </a>
           ))}
@@ -92,7 +93,7 @@ const links = [
         <div class="mobile-layanan-sub" hidden>
           {services.map(s => (
             <a href={s.href} class="mobile-sub-item">
-              <span aria-hidden="true">{s.icon}</span> {s.label}
+              <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:var(--orange-700);"><ServiceIcon type={s.icon} size={18} /></span> {s.label}
             </a>
           ))}
         </div>
@@ -194,10 +195,10 @@ const links = [
   }
   .nav-dropdown-item:hover { background: var(--orange-50); color: var(--orange-700); }
   .nav-dropdown-icon {
-    font-size: 16px;
     width: 28px; height: 28px;
     display: flex; align-items: center; justify-content: center;
     background: var(--orange-100);
+    color: var(--orange-700);
     border-radius: 8px;
     flex-shrink: 0;
   }
