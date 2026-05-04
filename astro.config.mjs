@@ -4,18 +4,24 @@ import sitemap from '@astrojs/sitemap';
 import { EnumChangefreq } from 'sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   site: 'https://tentaklik.com',
   output: 'static',
   trailingSlash: 'never',
+
   build: {
     inlineStylesheets: 'always',
   },
+
   compressHTML: true,
+
   prefetch: {
     prefetchAll: false,
     defaultStrategy: 'hover',
   },
+
   integrations: [
     sitemap({
       changefreq: EnumChangefreq.WEEKLY,
@@ -51,9 +57,11 @@ export default defineConfig({
       },
     }),
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   env: {
     schema: {
       PUBLIC_SITE_URL:  envField.string({ context: 'client', access: 'public', default: 'https://tentaklik.com' }),
@@ -61,4 +69,6 @@ export default defineConfig({
       PUBLIC_GA_ID:     envField.string({ context: 'client', access: 'public', optional: true }),
     },
   },
+
+  adapter: cloudflare(),
 });
