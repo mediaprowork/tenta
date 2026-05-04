@@ -94,14 +94,14 @@ const cspContent = [
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6YX6NJRTK"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-T6YX6NJRTK"></script>
+    <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-T6YX6NJRTK');
-  </script>
+    gtag('config', 'G-T6YX6NJRTK');
+    </script>
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
