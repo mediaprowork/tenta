@@ -18,7 +18,7 @@ const { plans } = Astro.props;
           <ul class="feat-list">
             {p.features.map(f => <li>{f}</li>)}
           </ul>
-          <a href="/kontak" class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`} style="justify-content:center;margin-top:auto;">Mulai Sekarang</a>
+          <a href="/kontak" class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`} style="justify-content:center;margin-top:auto;" onclick="zaraz.track('generate_lead')">Beli Paket</a>
         </div>
       ))}
     </div>
