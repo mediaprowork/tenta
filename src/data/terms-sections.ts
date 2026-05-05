@@ -2,7 +2,7 @@ export interface TermsSection { id: string; num: string; title: string; contentH
 
 export const TERMS_HERO = {
   eyebrow: 'Legal',
-  title: 'Ketentuan Layanan <span class="accent">Tentaklik</span>',
+  title: 'Ketentuan Layanan Tenta<span class="accent">Klik</span>',
   lede: 'Perjanjian antara Anda dan Tentaklik saat menggunakan situs web, layanan, dan produk digital kami. Ditulis dalam bahasa yang jelas biar tidak ada kejutan.',
   lastUpdated: '2026-05-05',
 };
