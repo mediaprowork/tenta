@@ -56,12 +56,23 @@ import { site, waLink } from '@data/site';
       </a>
     </div>
   </div>
-  <div class="container" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:13px;color:var(--ink-300);flex-wrap:wrap;gap:12px;">
+  <div class="container" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-300);flex-wrap:wrap;gap:12px;">
     <span>© 2026 tentaklik. All rights reserved.</span>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;">
+      <a href="/terms" class="footer-legal-link">Ketentuan Layanan</a>
+      <a href="/disclaimer" class="footer-legal-link">Disclaimer</a>
+    </div>
   </div>
 </footer>
 
 <style>
+  .footer-legal-link {
+    color: var(--ink-300);
+    transition: color 0.15s;
+  }
+  .footer-legal-link:hover {
+    color: var(--orange-300);
+  }
   .footer-wa-link {
     color: inherit;
     transition: color 0.15s;
