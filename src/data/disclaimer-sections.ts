@@ -2,7 +2,7 @@ export interface DisclaimerSection { id: string; num: string; title: string; con
 
 export const DISCLAIMER_HERO = {
   eyebrow: 'Disclaimer',
-  title: 'Disclaimer <span class="accent">Tentaklik</span>',
+  title: 'Disclaimer Tenta<span class="accent">Klik</span>',
   lede: 'Sebelum kita mulai kolaborasi, luangin 5 menit buat baca ini dulu — biar ekspektasi kita sama-sama jelas dari awal.',
   lastUpdated: '2026-05-05',
 };
