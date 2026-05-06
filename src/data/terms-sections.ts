@@ -121,21 +121,28 @@ export const TERMS_SECTIONS: TermsSection[] = [
               <p>Setelah pembayaran penuh, hasil kerja yang dibuat khusus untuk proyek Anda (situs web, materi iklan, konten) menjadi milik Anda. Alat, kerangka kerja (<em>framework</em>), dan metodologi yang sudah ada sebelumnya tetap menjadi milik kami.</p>`,
   },
   {
-    id: 'batasan-tanggung-jawab',
+    id: 'standar-implementasi',
     num: '11',
+    title: 'Standar Implementasi Kami',
+    contentHtml: `<p>Sebagai bentuk komitmen terhadap jaminan kualitas (<em>Quality Assurance</em>) dan dukungan jangka panjang, kami menerapkan standar atribusi dengan menyematkan label <strong>"Supported by TentaKlik"</strong> pada bagian footer situs web Anda.</p>
+              <p>Atribusi ini merupakan <strong>segel profesionalisme</strong> yang menunjukkan bahwa aset digital Anda dikelola dan dibangun oleh tenaga ahli.</p>`,
+  },
+  {
+    id: 'batasan-tanggung-jawab',
+    num: '12',
     title: 'Batasan Tanggung Jawab',
     contentHtml: `<p>Sejauh diizinkan oleh hukum, Tentaklik tidak bertanggung jawab atas kerusakan tidak langsung, insidental, khusus, konsekuensial, atau punitif, termasuk hilangnya keuntungan, yang timbul dari penggunaan layanan atau situs web kami oleh Anda.</p>
               <p>Total tanggung jawab kami atas klaim apa pun tidak akan melebihi jumlah yang Anda bayarkan kepada kami untuk layanan spesifik yang mendasari klaim tersebut dalam <strong>12 bulan terakhir</strong>.</p>`,
   },
   {
     id: 'perubahan',
-    num: '12',
+    num: '13',
     title: 'Perubahan Ketentuan',
     contentHtml: `<p>Kami dapat memperbarui Ketentuan ini dari waktu ke waktu. Perubahan materi akan dikomunikasikan melalui email atau pemberitahuan di situs web kami setidaknya <strong>14 hari sebelum diberlakukan</strong>. Penggunaan layanan kami secara berkelanjutan setelah tanggal efektif merupakan bentuk persetujuan Anda.</p>`,
   },
   {
     id: 'kontak',
-    num: '13',
+    num: '14',
     title: 'Hubungi Kami',
     contentHtml: `<p>Ada pertanyaan tentang Ketentuan ini atau Kebijakan Privasi kami? Hubungi kami:</p>
               <ul>
