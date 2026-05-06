@@ -33,15 +33,18 @@ export const DISCLAIMER_SECTIONS: DisclaimerSection[] = [
   {
     id: 'kepemilikan-akun',
     num: '03',
-    title: 'Kepemilikan Akun & Data Klien',
-    contentHtml: `<p>Ini salah satu hal yang kami pegang teguh. Semua akun iklan — Google Ads maupun Meta Ads — <strong>sepenuhnya milik klien</strong>. Kami hanya diberikan akses sebagai pengelola, bukan pemilik.</p>
+    title: 'Kepemilikan Akun & Model Layanan Kami',
+    contentHtml: `<p>Berbeda dari agensi pada umumnya, Tentaklik menawarkan layanan berbasis <strong>penyewaan akun iklan</strong> — artinya iklan Anda dijalankan menggunakan akun Google Ads dan Meta Ads milik Tentaklik, bukan akun baru atas nama Anda.</p>
+              <p>Model ini kami pilih karena akun kami sudah punya <strong>track record, trust score, dan riwayat performa</strong> yang matang di mata algoritma Google dan Meta — sehingga campaign bisa lebih cepat optimal dibanding akun baru yang masih <em>cold start</em>.</p>
               <ul>
-                <li>Akun Google Ads dan Meta Ads didaftarkan atas nama dan email klien</li>
-                <li>Klien bisa mencabut akses Tentaklik kapan saja tanpa syarat tambahan</li>
-                <li>Data performa, histori campaign, dan aset kreatif adalah hak penuh klien</li>
-                <li>Data bisnis Anda tidak akan kami bagikan ke pihak ketiga manapun</li>
+                <li>Akun iklan yang digunakan adalah milik Tentaklik — Anda menyewa akses dan kapasitas iklannya</li>
+                <li>Selama masa kerja sama aktif, akun dan semua campaign yang berjalan dikelola penuh oleh tim kami</li>
+                <li>Jika kerja sama berakhir, campaign akan dihentikan dan akun kembali ke pengelolaan Tentaklik sepenuhnya</li>
+                <li>Data performa campaign (laporan, angka, insight) tetap akan kami berikan ke Anda secara transparan via dashboard real-time</li>
+                <li>Informasi bisnis, produk, dan data Anda yang kami gunakan untuk keperluan iklan diperlakukan secara <em>confidential</em> — tidak dibagikan ke pihak lain</li>
               </ul>
-              <div class="callout callout-good"><strong>🔒 Confidential:</strong> Seluruh informasi bisnis yang Anda bagikan — saat konsultasi maupun selama kerja sama — kami perlakukan secara <strong>confidential dan profesional.</strong></div>`,
+              <div class="callout callout-warn"><strong>📌 Penting:</strong> Karena akun adalah milik Tentaklik, histori campaign <strong>tidak bisa dipindahkan</strong> ke akun pribadi Anda jika kerja sama berakhir. Pastikan Anda memahami model ini sebelum mulai — kalau ada pertanyaan, tanya kami dulu sebelum deal.</div>
+              <div class="callout callout-good"><strong>💡 Keuntungan model ini:</strong> Anda nggak perlu repot setup akun dari nol, nggak kena <em>learning period</em> panjang, dan langsung bisa manfaatin reputasi akun yang sudah <em>proven</em>. Lebih efisien, lebih cepat jalan.</div>`,
   },
   {
     id: 'platform-pihak-ketiga',
