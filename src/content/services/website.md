@@ -13,29 +13,39 @@ features:
   - { icon: "🛠", title: "Easy to Update",      desc: "CMS friendly atau dashboard custom — Anda bisa update sendiri." }
 plans:
   - name: "Starter"
-    tagline: "Cocok untuk landing page tunggal"
-    price: "Rp 6jt"
+    tagline: "Landing page sederhana untuk mulai online"
+    price: "Rp 3,8jt"
     unit: "/ project"
-    features: ["1 landing page (up to 5 sections)", "Mobile responsive", "Basic SEO setup", "Form WhatsApp / email", "1 revisi besar"]
-  - name: "Business"
-    tagline: "Company profile + lead generation"
-    price: "Rp 15jt"
+    features: ["WordPress + theme premium / full code", "Sampai 3 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 1 email professional", "Mobile responsive design", "Tombol WA, sosmed & CTA", "GA4 setup + basic SEO (meta, sitemap)", "3× revisi design (1 bulan)"]
+  - name: "Basic"
+    tagline: "Company profile dengan fitur lengkap"
+    price: "Rp 5jt"
+    unit: "/ project"
+    features: ["WordPress + theme premium / full code", "Sampai 7 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 3 email professional", "SEO on-page + schema markup", "Contact form & lead capture", "5× revisi (1 bulan)"]
+  - name: "Pro"
+    tagline: "Custom design + CMS untuk bisnis serius"
+    price: "Rp 7,5jt"
     unit: "/ project"
     featured: true
-    features: ["Up to 8 halaman", "Custom design + animation", "Advanced SEO + schema", "CMS / dashboard admin", "Analytics & tracking lengkap", "Free maintenance 1 bulan"]
+    features: ["Custom design + full code / WP premium", "10 landing page + dashboard admin", "Hosting premium KVM4 + blog & porto CMS", "Page speed & security optimization", "5 email professional", "SEO advanced + content strategy", "Form, lead capture, WA chatbot", "10× revisi (priority list, 3 bulan)"]
+  - name: "Business"
+    tagline: "Solusi enterprise & multi-fitur"
+    price: "Rp 11,5jt"
+    unit: "/ project"
+    features: ["Custom design + full code / WP premium", "Halaman & fitur sesuai kebutuhan", "Hosting business KVM8 + integrasi CRM", "SEO advanced + content audit", "Multi-language ready", "Payment gateway integration", "Performance monitoring", "15× revisi (priority list, 3 bulan)"]
   - name: "Custom"
-    tagline: "E-commerce, web app, custom needs"
+    tagline: "Stack & scope sepenuhnya menyesuaikan"
     price: "Custom"
     unit: "/ negotiable"
-    features: ["Unlimited pages", "Custom feature & integration", "E-commerce / payment gateway", "API / multi-role dashboard", "Dedicated PM + dev team"]
+    features: ["Stack tech request sesuai kebutuhan", "Integrasi CRM/ERP + payment gateway", "Dedicated support + VPS/shared host", "SEO advanced + content audit", "Custom dashboards & reports", "Multi-language + dark mode", "Unlimited revisi (priority list)"]
 process:
   - { title: "Discovery", desc: "Brief, target, dan struktur site map." }
   - { title: "Design",    desc: "Wireframe, mockup high-fi, dan revisi." }
   - { title: "Develop",   desc: "Coding, animation, integrasi, QA." }
   - { title: "Launch",    desc: "Go-live, training, dan handover." }
 faqs:
-  - { q: "Berapa lama timeline pengerjaan?", a: "Starter: 2-3 minggu. Business: 4-6 minggu. Custom: tergantung scope, biasanya 8-12 minggu." }
-  - { q: "Apakah sudah termasuk hosting dan domain?", a: "Domain dan hosting tahun pertama include di paket Business dan Custom. Starter belum termasuk — bisa ditambah." }
+  - { q: "Berapa lama timeline pengerjaan?", a: "Starter & Basic: 1-3 minggu. Pro: 3-5 minggu. Business: 5-8 minggu. Custom: tergantung scope, biasanya 8-12 minggu." }
+  - { q: "Apakah sudah termasuk hosting dan domain?", a: "Semua paket sudah include hosting dan domain .com/.id tahun pertama + free SSL." }
   - { q: "Bagaimana sistem pembayaran?", a: "DP 50% di awal, 30% saat development selesai, 20% saat go-live. Bisa diskusi kalau perlu cicilan lebih halus." }
   - { q: "Apa yang membedakan dari template?", a: "Custom desain, copywriting yang dioptimasi, integrasi tracking lengkap, dan support pasca-launch — bukan hanya tampilan." }
 seo:
