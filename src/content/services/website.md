@@ -16,28 +16,28 @@ plans:
     tagline: "Landing page sederhana untuk mulai online"
     price: "Rp 3,8jt"
     unit: ""
-    features: ["WordPress + theme premium / full code", "Sampai 3 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 1 email professional", "Mobile responsive design", "Tombol WA, sosmed & CTA", "GA4 setup + basic SEO (meta, sitemap)", "3× revisi design (1 bulan)"]
+    features: ["WordPress + theme premium / full code no CMS", "Sampai 3 halaman", "Shared Hosting KVM1 Hostinger", "Domain .com/.id (1 thn) + Free SSL", "1 email professional", "Mobile responsive design", "Tombol WhatsApp & sosmed + CTA", "GA4 setup + basic SEO (meta, sitemap)", "3× revisi design (1 bulan)"]
   - name: "Basic"
-    tagline: "Company profile dengan fitur lengkap"
+    tagline: "Include benefit Starter + fitur lebih lengkap"
     price: "Rp 5jt"
     unit: ""
-    features: ["WordPress + theme premium / full code", "Sampai 7 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 3 email professional", "SEO on-page + schema markup", "Contact form & lead capture", "5× revisi (1 bulan)"]
+    features: ["Semua benefit Starter", "Sampai 7 halaman", "3 email professional", "SEO on-page + schema markup + GSC Setup", "Contact form & lead capture", "5× revisi design (1 bulan)"]
   - name: "Pro"
-    tagline: "Custom design + CMS untuk bisnis serius"
+    tagline: "Include benefit Basic + custom design"
     price: "Rp 7,5jt"
     unit: ""
     featured: true
-    features: ["Custom design + full code / WP premium", "10 landing page + dashboard admin", "Hosting premium KVM4 + blog & porto CMS", "Page speed & security optimization", "5 email professional", "SEO advanced + content strategy", "Form, lead capture, WA chatbot", "10× revisi (priority list, 3 bulan)"]
+    features: ["Semua benefit Basic", "Custom design + full code / WP premium themes", "10 landing page + dashboard admin", "Shared Hosting premium KVM4 Hostinger", "5 email professional + Chatbot WA", "10× revisi (priority list, 3 bulan)"]
   - name: "Business"
-    tagline: "Solusi enterprise & multi-fitur"
+    tagline: "Include benefit Pro + solusi enterprise"
     price: "Rp 11,5jt"
     unit: ""
-    features: ["Custom design + full code / WP premium", "Halaman & fitur sesuai kebutuhan", "Hosting business KVM8 + integrasi CRM", "SEO advanced + content audit", "Multi-language ready", "Payment gateway integration", "Performance monitoring", "15× revisi (priority list, 3 bulan)"]
+    features: ["Semua benefit Pro", "Halaman, user & fitur sesuai kebutuhan", "Shared Hosting Business KVM8 Hostinger", "Integrasi ke sistem CRM", "Multi-language ready", "Payment gateway integration", "Performance monitoring", "15× revisi (priority list, 3 bulan)"]
   - name: "Custom"
     tagline: "Stack & scope sepenuhnya menyesuaikan"
-    price: "Custom"
+    price: "Menyesuaikan"
     unit: ""
-    features: ["Stack tech request sesuai kebutuhan", "Integrasi CRM/ERP + payment gateway", "Dedicated support + VPS/shared host", "SEO advanced + content audit", "Custom dashboards & reports", "Multi-language + dark mode", "Unlimited revisi (priority list)"]
+    features: ["Semua benefit Business", "Stack tech request sesuai kebutuhan", "Payment gateway + dedicated support", "VPS / Shared Host", "Custom dashboards & reports", "Multi-language + dark mode", "Unlimited revisi (priority list)"]
 process:
   - { title: "Discovery", desc: "Brief, target, dan struktur site map." }
   - { title: "Design",    desc: "Wireframe, mockup high-fi, dan revisi." }
