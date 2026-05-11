@@ -15,28 +15,28 @@ plans:
   - name: "Starter"
     tagline: "Landing page sederhana untuk mulai online"
     price: "Rp 3,8jt"
-    unit: "/ project"
+    unit: ""
     features: ["WordPress + theme premium / full code", "Sampai 3 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 1 email professional", "Mobile responsive design", "Tombol WA, sosmed & CTA", "GA4 setup + basic SEO (meta, sitemap)", "3× revisi design (1 bulan)"]
   - name: "Basic"
     tagline: "Company profile dengan fitur lengkap"
     price: "Rp 5jt"
-    unit: "/ project"
+    unit: ""
     features: ["WordPress + theme premium / full code", "Sampai 7 halaman", "Shared Hosting + domain .com/.id (1 thn)", "Free SSL + 3 email professional", "SEO on-page + schema markup", "Contact form & lead capture", "5× revisi (1 bulan)"]
   - name: "Pro"
     tagline: "Custom design + CMS untuk bisnis serius"
     price: "Rp 7,5jt"
-    unit: "/ project"
+    unit: ""
     featured: true
     features: ["Custom design + full code / WP premium", "10 landing page + dashboard admin", "Hosting premium KVM4 + blog & porto CMS", "Page speed & security optimization", "5 email professional", "SEO advanced + content strategy", "Form, lead capture, WA chatbot", "10× revisi (priority list, 3 bulan)"]
   - name: "Business"
     tagline: "Solusi enterprise & multi-fitur"
     price: "Rp 11,5jt"
-    unit: "/ project"
+    unit: ""
     features: ["Custom design + full code / WP premium", "Halaman & fitur sesuai kebutuhan", "Hosting business KVM8 + integrasi CRM", "SEO advanced + content audit", "Multi-language ready", "Payment gateway integration", "Performance monitoring", "15× revisi (priority list, 3 bulan)"]
   - name: "Custom"
     tagline: "Stack & scope sepenuhnya menyesuaikan"
     price: "Custom"
-    unit: "/ negotiable"
+    unit: ""
     features: ["Stack tech request sesuai kebutuhan", "Integrasi CRM/ERP + payment gateway", "Dedicated support + VPS/shared host", "SEO advanced + content audit", "Custom dashboards & reports", "Multi-language + dark mode", "Unlimited revisi (priority list)"]
 process:
   - { title: "Discovery", desc: "Brief, target, dan struktur site map." }
