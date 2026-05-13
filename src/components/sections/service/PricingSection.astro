@@ -1,7 +1,20 @@
 ---
 import { waLink } from '@data/site';
-interface Plan { name: string; tagline: string; price: string; unit: string; featured?: boolean; features: string[]; }
-interface Props { plans: Plan[]; service: string; }
+
+interface Plan {
+  name: string;
+  tagline: string;
+  price: string;
+  unit: string;
+  featured?: boolean;
+  features: string[];
+}
+
+interface Props {
+  plans: Plan[];
+  service: string;
+}
+
 const { plans, service } = Astro.props;
 ---
 <section id="pricing" style="background:var(--bg-warm);scroll-margin-top:90px;">
@@ -9,7 +22,7 @@ const { plans, service } = Astro.props;
     <h2 class="section-title">Pilih Paket yang Sesuai</h2>
     <p class="section-sub" style="margin-bottom:48px;">Transparan, no hidden fee. Bisa custom sesuai kebutuhan.</p>
     <div class="pricing-grid">
-      {plans.map(p => (
+      {plans.map((p: Plan) => (
         <div class={`pricing-card reveal ${p.featured ? 'featured' : ''}`}>
           <div>
             <h3 style="font-size:20px;">{p.name}</h3>
@@ -17,7 +30,7 @@ const { plans, service } = Astro.props;
           </div>
           <div class="price">{p.price}<small> {p.unit}</small></div>
           <ul class="feat-list">
-            {p.features.map(f => <li>{f}</li>)}
+            {p.features.map((f: string) => <li>{f}</li>)}
           </ul>
           <a
             href={waLink(`Halo Tentaklik! Saya tertarik dengan paket ${p.name} (${p.price}${p.unit}) untuk layanan ${service}. Bisa minta info lebih lanjut?`)}
@@ -35,13 +48,19 @@ const { plans, service } = Astro.props;
 
 <style>
   .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 18px;
     max-width: 1240px;
     margin: 0 auto;
   }
+  .pricing-grid > :global(.pricing-card) {
+    flex: 1 1 180px;
+    max-width: 260px;
+  }
   @media (max-width: 760px) {
-    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .pricing-grid { flex-direction: column; align-items: center; }
+    .pricing-grid > :global(.pricing-card) { flex: 1 1 100%; max-width: 400px; width: 100%; }
   }
 </style>
