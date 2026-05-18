@@ -60,21 +60,16 @@ function safeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(JSONLD_ESCAPE, (ch) => '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0'));
 }
 
-const gaScriptSrc = gaId ? ' https://www.googletagmanager.com https://www.google-analytics.com' : '';
-const gaConnectSrc = gaId ? ' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net' : '';
-const gaImgSrc = gaId ? ' https://www.google-analytics.com https://*.google-analytics.com https://*.g.doubleclick.net https://*.google.com' : '';
-
 const cspContent = [
   "default-src 'self'",
   "base-uri 'self'",
   "object-src 'none'",
-  "frame-ancestors 'self'",
   "form-action 'self' https://wa.me",
-  `script-src 'self' 'unsafe-inline'${gaScriptSrc}`,
+  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://cdn-cgi/`,
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
-  `img-src 'self' data: blob:${gaImgSrc}`,
-  `connect-src 'self'${gaConnectSrc}`,
+  `img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com https://*.g.doubleclick.net https://*.google.com`,
+  `connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://script.google.com https://script.googleusercontent.com`,
   "manifest-src 'self'",
   "worker-src 'self'",
   "media-src 'self'",
